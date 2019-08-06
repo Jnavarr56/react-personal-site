@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,700&display=swap');
+
+.App {
+  @apply h-screen w-screen
+}
+
+.blur-0 {
+  filter: blur(0);
+}
+
+.blur-10 {
+  filter: blur(10px);
+}
+
+.transition-all-25 {
+  transition: all .25s ease-out;
+}
+
+.transition-all-50 {
+  transition: all .5s ease;
+}
+
+.left-100 {
+  left: 100%
+}
+
+.kick-back {
+  transform: translate('-50%')
+}
