@@ -1,7 +1,6 @@
 import React from 'react'
-import LandingAnimation from './components/LandingAnimation/LandingAnimation'
 import Page from './components/Page/Page'
-import Home from './components/Sections/Home/Home'
+import LandingAnimation from './components/LandingAnimation/LandingAnimation'
 
 export default class Site extends React.Component {
     constructor(props) {
@@ -11,18 +10,6 @@ export default class Site extends React.Component {
             animationOver: false,
             showAnimation: true
         }
-
-        this.sections = [
-            { title: "Home", content: <Home /> },
-            { title: "About", content: null },
-            { title: "Skills", content: null },
-            { title: "Portfolio", content: null },
-            { title: "Articles", content: null },
-            { title: "Contact", content: null }
-        ].map(s => {
-            s.ref = React.createRef()
-            return s
-        })
     }   
 
     handleAnimationOver = () => {
@@ -33,15 +20,16 @@ export default class Site extends React.Component {
     }
 
     render = () => {
+
+        const { showAnimation, animationOver } = this.state
         
-        const scrollable = this.state.showAnimation ? 'overflow-hidden' : 'overflow-scroll'
+        const scrollable = showAnimation ? 'overflow-hidden' : 'overflow-scroll'
 
         return (
             <div className={`h-screen w-screen ${scrollable} relative`}>
-                {this.state.showAnimation && <LandingAnimation animationOver={this.state.animationOver} onAnimationOver={this.handleAnimationOver}/>}
-                {<Page animationOver={this.state.animationOver} sections={this.sections}/>}
+                {showAnimation && <LandingAnimation animationOver={animationOver} onAnimationOver={this.handleAnimationOver}/>}
+                {<Page animationOver={animationOver} />}
             </div>
-
         )
     }
 }

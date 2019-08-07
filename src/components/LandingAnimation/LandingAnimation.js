@@ -1,7 +1,7 @@
 import React from 'react'
 import particles from './ParticleConfig'
 
-export default class Landing extends React.Component {
+export default class LandingAnimation extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -29,6 +29,10 @@ export default class Landing extends React.Component {
         if (!this.state.animationOver) this.performAnimation()
 
         else setTimeout(() => this.props.onAnimationOver(), 250)
+    }
+
+    componentWillUnmount = () => {
+        window.pJSDom = [window.pJSDom[1]]
     }
 
     performAnimation = () => {
@@ -60,10 +64,10 @@ export default class Landing extends React.Component {
 
         return (
             <div className={`h-full w-full flex justify-center items-center absolute top-0 left-0 z-9999 transition-all-50 ${opacity}`}>
-                <p className="font-primary font-thin text-7xl sm:text-9xl z-50" style={{ backgroundColor: 'rgba(255, 255, 255, .50)' }}>
+                <p className="font-primary font-thin text-7xl sm:text-9xl z-50 bg-white-opacity-75">
                     {this.state.percent}%
                 </p>
-                <div id="landing-particles" className="h-full w-full absolute"></div>
+                <div id="landing-particles" className="h-full w-full absolute top-0 right-0"></div>
             </div>
         ) 
     }
