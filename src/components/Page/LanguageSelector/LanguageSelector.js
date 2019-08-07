@@ -1,5 +1,5 @@
 import React from 'react'
-import Translateable from '../../../Translateable/Translateable'
+import Translateable from '../../Translateable/Translateable'
 import Toggle from 'react-toggle'
 
 import './LanguageSelector.css'
