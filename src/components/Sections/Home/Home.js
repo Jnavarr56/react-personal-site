@@ -17,7 +17,8 @@ export default class Home extends React.Component {
       open: false,
       loading: false,
       data: null,
-      err: null
+      error: null,
+      dataSelector: 1
     }
 
     this.state = {
@@ -30,18 +31,39 @@ export default class Home extends React.Component {
         español: 'Desarrollador Full Stack'
       },
       button: {
-        english: 'View Latest Git Commit',
-        español: "Ver Ultimo 'Git Commit'"
+        english: 'View Latest Public Git Action',
+        español: "Ver Ultimo Git 'Commit' Publico"
       },
       modalContent: {
-        errorHeader: {
-          english: 'Oh No!',
-          español: 'Ay Caramba!'
-        },
         errorMessage: {
           english:
             'There was an error grabbing my Github data. Try again later!',
-          español: 'Hay un problema conesguiendo mi informacion de Github.'
+          español:
+            'Hay un problema conesguiendo mi informacion de Github. Intentalo mas tarde!'
+        },
+        event: {
+          PushEvent: {
+            english: 'Pushed to',
+            español: 'Empujo a'
+          },
+          CreateEvent: {
+            english: 'Created',
+            español: 'Creó'
+          }
+        },
+        item: {
+          branch: {
+            english: 'branch',
+            español: 'branch'
+          },
+          repository: {
+            english: 'repository',
+            español: 'repositorio'
+          }
+        },
+        refMaster: {
+          english: 'the master',
+          español: 'el "master"'
         }
       }
     }
@@ -56,31 +78,64 @@ export default class Home extends React.Component {
   }
 
   handleOpenModalClick = () => {
-    this.setState({ open: true, loading: true }, async () => {
-      const client = new OctoKit({
-        auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN
-      })
-
-      await client.activity
-        .listEventsForUser({
-          username: process.env.REACT_APP_GITHUB_USERNAME
-        })
-        .then(
-          ({ data, headers, status }) => {
-            clearTimeout(this.modalContentDelay)
-            this.modalContentDelay = setTimeout(() => {
-              this.setState({ loading: false, data })
-            }, 500)
-          },
-          err => {
-            this.setState({ loading: false, err })
-          }
-        )
-    })
+    this.setState({ open: true, loading: true }, this.fetchGithubData)
   }
 
   handleCloseModalClick = () => {
     this.setState({ ...this.initialState })
+  }
+
+  fetchGithubData = async () => {
+    const client = new OctoKit({
+      auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN
+    })
+
+    const repoQueryParams = {
+      visibility: 'public',
+      sort: 'updated',
+      direction: 'desc'
+    }
+
+    await client.repos.list(repoQueryParams).then(
+      async ({ data }) => {
+        console.log(data)
+
+        const repoEventsQueryParams = {
+          repo: data[1].name, //Testing with this repo
+          owner: process.env.REACT_APP_GITHUB_USERNAME
+        }
+
+        await client.activity.listRepoEvents(repoEventsQueryParams).then(
+          ({ data }) => {
+            console.log(data)
+
+            this.delaySetData(true, data)
+          },
+          error => {
+            console.log(error)
+
+            this.delaySetData(false, error)
+          }
+        )
+      },
+      error => {
+        console.log(error)
+
+        this.delaySetData(false, error)
+      }
+    )
+  }
+
+  delaySetData = (isData, data) => {
+    const update = { loading: false }
+    if (isData) update.data = data
+    else update.error = data
+
+    clearTimeout(this.modalContentDelay)
+
+    this.modalContentDelay = setTimeout(() => {
+      this.setState(update)
+    }, 1250)
   }
 
   renderModalContent = () => {
@@ -102,8 +157,124 @@ export default class Home extends React.Component {
             />
           </p>
         )
-      } else {
-        return <p className="font-primary text-red-base">SUCCESS!</p>
+      } else if (this.state.data) {
+        const { data, dataSelector } = this.state
+        const { event, item, refMaster } = this.text.modalContent
+        const { language } = this.props
+
+        const { type, payload, repo } = data[dataSelector]
+
+        const action = event[type][language]
+        //const target = item[payload.ref][language]
+        console.log(event[type])
+
+        const New = {
+          english: 'new',
+          español: 'nuevo'
+        }
+
+        const Called = {
+          english: 'called',
+          español: 'llamada'
+        }
+
+        const In = {
+          english: 'in',
+          español: 'en'
+        }
+
+        let text = ''
+        let link = `https://github.com/${repo.name}`
+
+        if (type === 'CreateEvent') {
+          const target = item[payload.ref_type][language]
+
+          if (payload.ref === 'master') {
+            link += '/tree/master'
+            text = (
+              <span>
+                {`${action} `}{' '}
+                <a
+                  className="underline"
+                  href={link}
+                >{`${refMaster[language]} ${target}`}</a>
+                {` ${In[language]} ${item.repository[language]} ${Called[language]}`}{' '}
+                <a
+                  className="underline"
+                  href={`https://github.com/${repo.name}`}
+                >{` ${repo.name.split('/')[1]}`}</a>
+                .
+              </span>
+            )
+          } else {
+            if (payload.ref_type === 'branch') {
+              link += `/tree/${payload.ref}`
+              text = (
+                <span>
+                  {`${action} ${New[language]} ${target} ${Called[language]}`}{' '}
+                  <a className="underline" href={link}>{`${payload.ref}`}</a>
+                  {` ${In[language]} ${item.repository[language]} ${Called[language]} `}
+                  <a
+                    className="underline"
+                    href={`https://github.com/${repo.name}`}
+                  >{` ${repo.name.split('/')[1]}`}</a>
+                  .
+                </span>
+              )
+            } else {
+              link += `/tree/${payload.ref}`
+              text = (
+                <span>
+                  {`${action} ${New[language]} ${target} ${Called[language]}`}{' '}
+                  <a className="underline" href={link}>{`${
+                    repo.name.split('/')[1]
+                  }`}</a>
+                  .
+                </span>
+              )
+            }
+          }
+        } else if (type === 'PushEvent') {
+          if (payload.ref === 'refs/heads/master') {
+            text = (
+              <span>
+                {`${action}`}{' '}
+                <a
+                  className="underline"
+                  href={link + '/tree/master'}
+                >{`${refMaster[language]} branch.`}</a>
+                {` ${In[language]} ${item.repository[language]} ${Called[language]}`}{' '}
+                <a
+                  className="underline"
+                  href={`https://github.com/${repo.name}`}
+                >{` ${repo.name.split('/')[1]}`}</a>
+                .
+              </span>
+            )
+          } else {
+            text = (
+              <span>
+                {`${action}`}
+                <a
+                  className="underline"
+                  href={link + '/tree/master'}
+                >{`branch ${Called[language]} ${payload.ref}.`}</a>
+                {` ${In[language]} ${item.repository[language]} ${Called[language]}`}{' '}
+                <a
+                  className="underline"
+                  href={`https://github.com/${repo.name}`}
+                >{` ${repo.name.split('/')[1]}`}</a>
+                .
+              </span>
+            )
+          }
+        }
+
+        return (
+          <p className="font-primary text-red-base">
+            <Translateable text={text} />
+          </p>
+        )
       }
     }
   }
@@ -118,13 +289,12 @@ export default class Home extends React.Component {
             ) : (
               <GoOctoface className="text-red-base text-2xl" />
             )}
-
             <MdClose
               className="text-red-base text-2xl cursor-pointer"
               onClick={this.handleCloseModalClick}
             />
           </div>
-          <div className="w-full p-10 flex flex-col justify-center items-center">
+          <div className="w-full flex-grow p-4 flex flex-col justify-center items-center">
             {this.renderModalContent()}
           </div>
         </div>
