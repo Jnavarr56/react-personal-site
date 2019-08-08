@@ -1,36 +1,34 @@
-import React from 'react';
-import Section from '../Sections/Section';
-import Home from '../Sections/Home/Home';
-import LanguageSelector from './LanguageSelector/LanguageSelector';
+import React from 'react'
+import Section from '../Sections/Section'
+import Home from '../Sections/Home/Home'
+import LanguageSelector from './LanguageSelector/LanguageSelector'
 
 export default class Page extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       language: 0
-    };
+    }
 
-    this.languages = ['english', 'español'];
+    this.languages = ['english', 'español']
 
-    this.sections = [{ section: <Home />, ref: React.createRef() }];
+    this.sections = [{ section: <Home />, ref: React.createRef() }]
   }
 
   toggleLanguage = () => {
-    this.setState(state => ({ language: state.language ? 0 : 1 }));
-  };
+    this.setState(state => ({ language: state.language ? 0 : 1 }))
+  }
 
   getOpacity = () => {
-    return this.props.animationOver
-      ? 'opacity-100 blur-0'
-      : 'opacity-0 blur-10';
-  };
+    return this.props.animationOver ? 'opacity-100 blur-0' : 'opacity-0 blur-10'
+  }
 
   renderSectionWithLanguage = section => {
     return React.cloneElement(section, {
       language: this.languages[this.state.language]
-    });
-  };
+    })
+  }
 
   render = () => {
     return (
@@ -51,9 +49,9 @@ export default class Page extends React.Component {
             >
               {this.renderSectionWithLanguage(s.section)}
             </Section>
-          );
+          )
         })}
       </div>
-    );
-  };
+    )
+  }
 }

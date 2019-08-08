@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.click-sonar {
+  height: 0;
+  width: 0;
+  opacity: 0.75;
+  border-radius: 100%;
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%);
+  animation: ClickSonar 0.5s linear 0s 1;
+  z-index: 100;
+  background-color: white;
+
+  @apply bg-white;
+}
+@keyframes ClickSonar {
+  100% {
+    height: calc(400px * 2);
+    width: calc(400px * 2);
+    opacity: 0;
+  }
+}

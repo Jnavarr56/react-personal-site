@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <Site />
     </div>
-  );
+  )
 }
 
 export default App
