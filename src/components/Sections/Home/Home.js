@@ -8,6 +8,8 @@ import Modal from '../../Modal/Modal'
 import ReactLoading from 'react-loading'
 import { MdClose, MdWarning } from 'react-icons/md'
 import { GoOctoface } from 'react-icons/go'
+import ContentSwitcher from './ContentSwitcher/ContentSwitcher'
+import testData from './TestData'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -18,7 +20,7 @@ export default class Home extends React.Component {
       loading: false,
       data: null,
       error: null,
-      dataSelector: 1
+      dataSelector: 0
     }
 
     this.state = {
@@ -32,7 +34,7 @@ export default class Home extends React.Component {
       },
       button: {
         english: 'View Latest Public Git Action',
-        español: "Ver Ultimo Git 'Commit' Publico"
+        español: 'Ver Ultimo Accion de Git Publico'
       },
       modalContent: {
         errorMessage: {
@@ -43,8 +45,8 @@ export default class Home extends React.Component {
         },
         event: {
           PushEvent: {
-            english: 'Pushed to',
-            español: 'Empujo a'
+            english: 'Pushed',
+            español: 'Empujo'
           },
           CreateEvent: {
             english: 'Created',
@@ -86,44 +88,48 @@ export default class Home extends React.Component {
   }
 
   fetchGithubData = async () => {
-    const client = new OctoKit({
-      auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN
+    // const client = new OctoKit({
+    //   auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN
+    // })
+
+    // const repoQueryParams = {
+    //   visibility: 'public',
+    //   sort: 'updated',
+    //   direction: 'desc'
+    // }
+
+    // await client.repos.list(repoQueryParams).then(
+    //   async ({ data }) => {
+
+    //     const repoEventsQueryParams = {
+    //       repo: data[1].name, //Testing with this repo
+    //       owner: process.env.REACT_APP_GITHUB_USERNAME
+    //     }
+
+    //     await client.activity.listRepoEvents(repoEventsQueryParams).then(
+    //       ({ data }) => {
+    //         console.log(data)
+
+    //         this.delaySetData(true, data)
+    //       },
+    //       error => {
+    //         console.log(error)
+
+    //         this.delaySetData(false, error)
+    //       }
+    //     )
+    //   },
+    //   error => {
+    //     console.log(error)
+
+    //     this.delaySetData(false, error)
+    //   }
+    // )
+
+    this.setState({
+      data: [testData()],
+      loading: false
     })
-
-    const repoQueryParams = {
-      visibility: 'public',
-      sort: 'updated',
-      direction: 'desc'
-    }
-
-    await client.repos.list(repoQueryParams).then(
-      async ({ data }) => {
-        console.log(data)
-
-        const repoEventsQueryParams = {
-          repo: data[1].name, //Testing with this repo
-          owner: process.env.REACT_APP_GITHUB_USERNAME
-        }
-
-        await client.activity.listRepoEvents(repoEventsQueryParams).then(
-          ({ data }) => {
-            console.log(data)
-
-            this.delaySetData(true, data)
-          },
-          error => {
-            console.log(error)
-
-            this.delaySetData(false, error)
-          }
-        )
-      },
-      error => {
-        console.log(error)
-
-        this.delaySetData(false, error)
-      }
-    )
   }
 
   delaySetData = (isData, data) => {
@@ -165,8 +171,8 @@ export default class Home extends React.Component {
         const { type, payload, repo } = data[dataSelector]
 
         const action = event[type][language]
-        //const target = item[payload.ref][language]
-        console.log(event[type])
+
+        let iconTarget
 
         const New = {
           english: 'new',
@@ -183,6 +189,11 @@ export default class Home extends React.Component {
           español: 'en'
         }
 
+        const To = {
+          english: 'to',
+          español: 'a'
+        }
+
         let text = ''
         let link = `https://github.com/${repo.name}`
 
@@ -190,6 +201,7 @@ export default class Home extends React.Component {
           const target = item[payload.ref_type][language]
 
           if (payload.ref === 'master') {
+            iconTarget = 'branch'
             link += '/tree/master'
             text = (
               <span>
@@ -208,6 +220,7 @@ export default class Home extends React.Component {
             )
           } else {
             if (payload.ref_type === 'branch') {
+              iconTarget = 'branch'
               link += `/tree/${payload.ref}`
               text = (
                 <span>
@@ -222,6 +235,7 @@ export default class Home extends React.Component {
                 </span>
               )
             } else {
+              iconTarget = 'repo'
               link += `/tree/${payload.ref}`
               text = (
                 <span>
@@ -235,14 +249,20 @@ export default class Home extends React.Component {
             }
           }
         } else if (type === 'PushEvent') {
+          iconTarget = 'branch'
+
+          const { commits } = payload
+
           if (payload.ref === 'refs/heads/master') {
             text = (
               <span>
-                {`${action}`}{' '}
+                {`${action} ${commits.length} commit${
+                  commits.length > 1 ? 's' : ''
+                } ${To[language]}`}{' '}
                 <a
                   className="underline"
                   href={link + '/tree/master'}
-                >{`${refMaster[language]} branch.`}</a>
+                >{`${refMaster[language]} branch`}</a>
                 {` ${In[language]} ${item.repository[language]} ${Called[language]}`}{' '}
                 <a
                   className="underline"
@@ -252,13 +272,17 @@ export default class Home extends React.Component {
               </span>
             )
           } else {
+            let branchName = payload.ref.split('/')
+            branchName = branchName[branchName.length - 1]
             text = (
               <span>
-                {`${action}`}
-                <a
-                  className="underline"
-                  href={link + '/tree/master'}
-                >{`branch ${Called[language]} ${payload.ref}.`}</a>
+                {`${action} ${commits.length} commit${
+                  commits.length > 1 ? 's' : ''
+                } ${To[language]} branch ${Called[language]} `}{' '}
+                <a className="underline" href={link + `/tree/${branchName}`}>
+                  {' '}
+                  {`${branchName}`}
+                </a>
                 {` ${In[language]} ${item.repository[language]} ${Called[language]}`}{' '}
                 <a
                   className="underline"
@@ -270,10 +294,18 @@ export default class Home extends React.Component {
           }
         }
 
+        console.log(this.state.data)
+
         return (
-          <p className="font-primary text-red-base">
-            <Translateable text={text} />
-          </p>
+          <ContentSwitcher
+            summary={text}
+            createdAt={data[dataSelector].created_at}
+            commits={payload.commits}
+            repo={repo}
+            target={iconTarget}
+            event={type}
+            language={this.props.language}
+          />
         )
       }
     }
