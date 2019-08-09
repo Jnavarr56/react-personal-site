@@ -51,8 +51,7 @@ export default class ContentSwitcher extends React.Component {
     }
 
     const stamp = moment(this.props.createdAt)
-    if (this.props.language === 'español') stamp.locale('es')
-    else stamp.locale('en')
+    stamp.locale(this.props.language.slice(0, 2))
 
     return (
       <div

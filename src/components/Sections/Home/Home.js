@@ -1,4 +1,5 @@
 import React from 'react'
+import OctoKit from '@octokit/rest'
 import Translateable from '../../Translateable/Translateable'
 import particles from './ParticleConfig'
 import IconLinks from './IconLinks/IconLinks'
@@ -87,48 +88,47 @@ export default class Home extends React.Component {
   }
 
   fetchGithubData = async () => {
-    // const client = new OctoKit({
-    //   auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN
-    // })
-
-    // const repoQueryParams = {
-    //   visibility: 'public',
-    //   sort: 'updated',
-    //   direction: 'desc'
-    // }
-
-    // await client.repos.list(repoQueryParams).then(
-    //   async ({ data }) => {
-
-    //     const repoEventsQueryParams = {
-    //       repo: data[1].name, //Testing with this repo
-    //       owner: process.env.REACT_APP_GITHUB_USERNAME
-    //     }
-
-    //     await client.activity.listRepoEvents(repoEventsQueryParams).then(
-    //       ({ data }) => {
-    //         console.log(data)
-
-    //         this.delaySetData(true, data)
-    //       },
-    //       error => {
-    //         console.log(error)
-
-    //         this.delaySetData(false, error)
-    //       }
-    //     )
-    //   },
-    //   error => {
-    //     console.log(error)
-
-    //     this.delaySetData(false, error)
-    //   }
-    // )
-
-    this.setState({
-      data: [testData()],
-      loading: false
+    const client = new OctoKit({
+      auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN
     })
+
+    const repoQueryParams = {
+      visibility: 'public',
+      sort: 'updated',
+      direction: 'desc'
+    }
+
+    await client.repos.list(repoQueryParams).then(
+      async ({ data }) => {
+        const repoEventsQueryParams = {
+          repo: data[1].name, //Testing with this repo
+          owner: process.env.REACT_APP_GITHUB_USERNAME
+        }
+
+        await client.activity.listRepoEvents(repoEventsQueryParams).then(
+          ({ data }) => {
+            console.log(data)
+
+            this.delaySetData(true, data)
+          },
+          error => {
+            console.log(error)
+
+            this.delaySetData(false, error)
+          }
+        )
+      },
+      error => {
+        console.log(error)
+
+        this.delaySetData(false, error)
+      }
+    )
+
+    // this.setState({
+    //   data: [testData()],
+    //   loading: false
+    // })
   }
 
   delaySetData = (isData, data) => {
