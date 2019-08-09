@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,700&display=swap');
 
 .App {
-  @apply h-screen w-screen
+  @apply h-screen w-screen;
 }
 
 .blur-0 {
@@ -17,13 +17,32 @@
 }
 
 .transition-all-25 {
-  transition: all .25s ease;
+  transition: all 0.25s ease;
 }
 
 .transition-all-50 {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .bg-white-opacity-75 {
-  background-color: rgba(255, 255, 255, .75);
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.scrollbar-x-visible {
+  @apply overflow-y-hidden overflow-x-scroll;
+}
+.scrollbar-y-visible {
+  @apply overflow-x-hidden overflow-y-scroll;
+}
+.scrollbar-x-visible::-webkit-scrollbar,
+.scrollbar-y-visible::-webkit-scrollbar {
+  @apply bg-transparent h-2 w-2;
+}
+.scrollbar-x-visible::-webkit-scrollbar-track,
+.scrollbar-y-visible::-webkit-scrollbar-track {
+  @apply bg-transparent w-5;
+}
+.scrollbar-x-visible::-webkit-scrollbar-thumb,
+.scrollbar-y-visible::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-red-base;
 }

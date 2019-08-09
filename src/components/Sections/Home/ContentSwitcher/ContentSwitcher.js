@@ -5,12 +5,11 @@ import {
   GoTerminal,
   GoRepoPush,
   GoRepo,
-  GoGitBranch
+  GoGitBranch,
+  GoTrashcan
 } from 'react-icons/go'
 import moment from 'moment'
 import 'moment/locale/es'
-
-//import moment from 'moment-timezone'
 
 export default class ContentSwitcher extends React.Component {
   constructor(props) {
@@ -36,7 +35,10 @@ export default class ContentSwitcher extends React.Component {
     const { target, event } = this.props
 
     let summaryIcon = null
-    if (target === 'branch') {
+
+    if (event === 'DeleteEvent') {
+      summaryIcon = <GoTrashcan className="text-red-base text-5xl" />
+    } else if (target === 'branch') {
       if (event === 'CreateEvent')
         summaryIcon = <GoGitBranch className="text-red-base text-5xl" />
       else if (event === 'PushEvent')
@@ -50,19 +52,20 @@ export default class ContentSwitcher extends React.Component {
       summaryIcon = <GoTerminal className="text-red-base text-5xl" />
     }
 
+    console.log(summaryIcon)
     const stamp = moment(this.props.createdAt)
     stamp.locale(this.props.language.slice(0, 2))
 
     return (
       <div
-        className="h-full w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative"
+        className={`w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative h-40 scrollbar-y-visible`}
         style={{ left }}
       >
         <div className="mb-3 hidden sm:block">{summaryIcon}</div>
-        <p className="text-red-base">
+        <p className="text-red-base text-center">
           <Translateable text={this.props.summary} />
         </p>
-        <p className="text-red-base">
+        <p className="text-red-base text-center">
           <Translateable text={stamp.format('LLLL')} />
         </p>
       </div>
@@ -78,16 +81,16 @@ export default class ContentSwitcher extends React.Component {
     return (
       <div
         key={`c-${idx}`}
-        className="h-full w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative"
+        className={`w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative h-40 scrollbar-y-visible`}
         style={{ left: `-${this.state.section * 100}%` }}
       >
         <GoGitCommit className="text-red-base text-5xl" />
-        <p className="text-red-base">
+        <p className="text-red-base text-center">
           <Translateable text={message} />
         </p>
         <a
           href={`https://github.com/${this.props.repo.name}/commit/${commit.sha}`}
-          className="text-red-base underline"
+          className="text-red-base underline text-center"
         >
           <Translateable text={link} />
         </a>
@@ -101,14 +104,14 @@ export default class ContentSwitcher extends React.Component {
       : [this.renderSummary()]
 
     return (
-      <div className="h-full w-full flex justify-start items-center relative">
+      <div className="h-full w-full flex justify-start items-start relative pt-4 px-4 sm:px-2">
         {sections.map((c, i) => {
           if (!i) return c
           else return this.renderCommits(c, i)
         })}
 
         {this.props.commits && (
-          <div className="w-full flex justify-around items-center py-3 px-6 absolute bottom-0">
+          <div className="w-full flex justify-center items-start absolute bottom-0 left-0 h-8 pb-2">
             {sections.map((c, i) => {
               const bg = this.state.section === i ? 'bg-red-base' : 'bg-white'
 
@@ -116,7 +119,7 @@ export default class ContentSwitcher extends React.Component {
                 <div
                   key={`ball-${i}`}
                   onClick={() => this.setState({ section: i })}
-                  className={`${bg} h-3 w-3 rounded-full cursor-pointer transition-all-50`}
+                  className={`${bg} h-3 w-3 mx-1 rounded-full cursor-pointer transition-all-50`}
                 ></div>
               )
             })}

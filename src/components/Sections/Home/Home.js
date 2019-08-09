@@ -51,6 +51,10 @@ export default class Home extends React.Component {
           CreateEvent: {
             english: 'Created',
             español: 'Creó'
+          },
+          DeleteEvent: {
+            english: 'Deleted',
+            español: 'Elimino'
           }
         },
         item: {
@@ -88,6 +92,11 @@ export default class Home extends React.Component {
   }
 
   fetchGithubData = async () => {
+    // this.setState({
+    //   data: [testData()],
+    //   loading: false
+    // })
+
     const client = new OctoKit({
       auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN
     })
@@ -124,11 +133,6 @@ export default class Home extends React.Component {
         this.delaySetData(false, error)
       }
     )
-
-    // this.setState({
-    //   data: [testData()],
-    //   loading: false
-    // })
   }
 
   delaySetData = (isData, data) => {
@@ -291,9 +295,48 @@ export default class Home extends React.Component {
               </span>
             )
           }
-        }
+        } else if (type === 'DeleteEvent') {
+          const target = item[payload.ref_type][language]
 
-        console.log(this.state.data)
+          if (payload.ref === 'master') {
+            iconTarget = 'branch'
+            link += '/tree/master'
+            text = (
+              <span>
+                {`${action} `}{' '}
+                <a
+                  className="underline"
+                  href={link}
+                >{`${refMaster[language]} ${target}`}</a>
+                {` ${In[language]} ${item.repository[language]} ${Called[language]}`}{' '}
+                <a
+                  className="underline"
+                  href={`https://github.com/${repo.name}`}
+                >{` ${repo.name.split('/')[1]}`}</a>
+                .
+              </span>
+            )
+          } else {
+            if (payload.ref_type === 'branch') {
+              iconTarget = 'branch'
+              link += `/tree/${payload.ref}`
+              text = (
+                <span>
+                  {`${action} ${target} ${Called[language]} ${payload.ref} ${In[language]} ${item.repository[language]} ${Called[language]} `}
+                  <a
+                    className="underline"
+                    href={`https://github.com/${repo.name}`}
+                  >{` ${repo.name.split('/')[1]}`}</a>
+                  .
+                </span>
+              )
+            } else {
+              iconTarget = 'repo'
+              link += `/tree/${payload.ref}`
+              text = <span>{`${action} ${target} ${Called[language]}.`}</span>
+            }
+          }
+        }
 
         return (
           <ContentSwitcher
@@ -312,7 +355,7 @@ export default class Home extends React.Component {
 
   renderModalContainer = () => {
     return (
-      <div className="h-64 w-screen px-2 md:h-100 md:w-200 md:px-0 flex flex-col justify-start items-center">
+      <div className="h-64 w-screen md:h-100 md:w-200 flex flex-col justify-start items-center">
         <div className="rounded overflow-hidden bg-black h-full w-full flex flex-col justify-start items-center">
           <div className="w-full border-b border-red-base flex justify-between p-3">
             {this.state.error ? (
@@ -325,7 +368,7 @@ export default class Home extends React.Component {
               onClick={this.handleCloseModalClick}
             />
           </div>
-          <div className="w-full flex-grow p-4 flex flex-col justify-center items-center">
+          <div className="w-full flex-grow flex flex-col justify-center items-center">
             {this.renderModalContent()}
           </div>
         </div>
