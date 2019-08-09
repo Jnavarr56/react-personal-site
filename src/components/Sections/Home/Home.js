@@ -1,5 +1,4 @@
 import React from 'react'
-import OctoKit from '@octokit/rest'
 import Translateable from '../../Translateable/Translateable'
 import particles from './ParticleConfig'
 import IconLinks from './IconLinks/IconLinks'

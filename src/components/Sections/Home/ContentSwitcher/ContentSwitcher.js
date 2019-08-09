@@ -7,7 +7,10 @@ import {
   GoRepo,
   GoGitBranch
 } from 'react-icons/go'
-import moment from 'moment-timezone'
+import moment from 'moment'
+import 'moment/locale/es'
+
+//import moment from 'moment-timezone'
 
 export default class ContentSwitcher extends React.Component {
   constructor(props) {
@@ -47,10 +50,9 @@ export default class ContentSwitcher extends React.Component {
       summaryIcon = <GoTerminal className="text-red-base text-5xl" />
     }
 
-    //const m = moment()
-    //m.locale(false)
-    //m.locale(this.props.language.slice(0, 3))
-    const stamp = moment(this.props.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+    const stamp = moment(this.props.createdAt)
+    if (this.props.language === 'español') stamp.locale('es')
+    else stamp.locale('en')
 
     return (
       <div
@@ -62,7 +64,7 @@ export default class ContentSwitcher extends React.Component {
           <Translateable text={this.props.summary} />
         </p>
         <p className="text-red-base">
-          <Translateable text={stamp} />
+          <Translateable text={stamp.format('LLLL')} />
         </p>
       </div>
     )
