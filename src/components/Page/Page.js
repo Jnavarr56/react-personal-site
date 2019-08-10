@@ -9,7 +9,8 @@ export default class Page extends React.Component {
     super(props)
 
     this.state = {
-      language: 0
+      language: 0,
+      fadeIn: false
     }
 
     this.languages = ['english', 'español']
@@ -20,45 +21,56 @@ export default class Page extends React.Component {
     ]
   }
 
-  toggleLanguage = () => {
-    this.setState(state => ({ language: state.language ? 0 : 1 }))
+  componentDidMount = () => {
+    this.setState({ fadeIn: true })
   }
 
-  getOpacity = () => {
-    return this.props.animationOver ? 'opacity-100 blur-0' : 'opacity-0 blur-10'
-  }
+  // toggleLanguage = () => {
+  //   this.setState(state => ({ language: state.language ? 0 : 1 }))
+  // }
 
-  renderSectionWithLanguage = section => {
-    return React.cloneElement(section, {
-      language: this.languages[this.state.language]
-    })
-  }
+  // getOpacity = () => {
+
+  //   return this.props.animationOver ? 'opacity-100 blur-0' : 'opacity-0 blur-10'
+  // }
+
+  // renderSectionWithLanguage = section => {
+  //   return React.cloneElement(section, {
+  //     language: this.languages[this.state.language]
+  //   })
+  // }
 
   render = () => {
-    return (
-      <React.Fragment>
-        {this.props.animationOver && (
-          <LanguageSelector
-            language={this.languages[this.state.language]}
-            toggle={this.toggleLanguage}
-          />
-        )}
-        <div
-          className={`h-screen w-screen relative transition-all-50 ${this.getOpacity()} overflow-y-scroll`}
-        >
-          {this.sections.map((s, i) => {
-            return (
-              <Section
-                key={`section-${i}`}
-                innerRef={s.ref}
-                styleClasses={i % 2 ? 'bg-red-base' : 'bg-white'}
-              >
-                {this.renderSectionWithLanguage(s.section)}
-              </Section>
-            )
-          })}
-        </div>
-      </React.Fragment>
-    )
+    // return (
+    //   <React.Fragment>
+    //     {this.props.animationOver && (
+    //       <LanguageSelector
+    //         language={this.languages[this.state.language]}
+    //         toggle={this.toggleLanguage}
+    //       />
+    //     )}
+    //     <div
+    //       className={`h-screen w-screen relative transition-all-50 ${this.getOpacity()} overflow-y-scroll`}
+    //     >
+    //       {this.sections.map((s, i) => {
+    //         return (
+    //           <Section
+    //             key={`section-${i}`}
+    //             innerRef={s.ref}
+    //             styleClasses={i % 2 ? 'bg-red-base' : 'bg-white'}
+    //           >
+    //             {this.renderSectionWithLanguage(s.section)}
+    //           </Section>
+    //         )
+    //       })}
+    //     </div>
+    //   </React.Fragment>
+    // )
+
+    const opacity = this.state.fadeIn
+      ? 'opacity-100 blur-0'
+      : 'opacity-0 blur-10'
+
+    return <h1 className={`transition-all-50 ${opacity}`}>Hey!</h1>
   }
 }

@@ -7,9 +7,20 @@ export default class Site extends React.Component {
     super(props)
 
     this.state = {
-      animationOver: false,
-      showAnimation: true
+      fadePageIn: false
     }
+  }
+
+  componentDidMount = () => {
+    this._setVisited()
+  }
+
+  _getVisited = () => {
+    return window.localStorage.getItem('visitedJorge')
+  }
+
+  _setVisited = () => {
+    window.localStorage.setItem('visitedJorge', Date.now())
   }
 
   handleAnimationOver = () => {
@@ -19,20 +30,19 @@ export default class Site extends React.Component {
   }
 
   render = () => {
-    const { showAnimation, animationOver } = this.state
-
-    const scrollable = showAnimation ? 'overflow-hidden' : 'overflow-scroll'
-
     return (
-      // <div className={`h-screen w-screen ${scrollable} relative`}>
-      <div className={`w-screen overflow-hidden relative`}>
-        {showAnimation && (
+      <div className={`h-screen w-screen overflow-y-scroll relative`}>
+        {this._getVisited() ? (
+          <Page />
+        ) : (
           <LandingAnimation
-            animationOver={animationOver}
+            countUpInterval={20}
+            fadeOutDelay={10000}
+            fadeOutDuration={5000}
+            transition={'transition-all-50'}
             onAnimationOver={this.handleAnimationOver}
           />
         )}
-        {<Page animationOver={animationOver} />}
       </div>
     )
   }
