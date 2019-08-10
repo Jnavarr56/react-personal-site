@@ -18,7 +18,7 @@ export default class LandingAnimation extends React.Component {
 
     this.incrementer = setInterval(() => {
       this.setState(state => ({ percent: state.percent + 1 }))
-    }, 25)
+    }, 5)
   }
 
   componentDidUpdate = () => {

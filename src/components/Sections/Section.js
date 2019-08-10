@@ -6,7 +6,10 @@ const Section = props => {
       className={`h-screen w-screen relative ${props.styleClasses}`}
       ref={props.innerRef}
     >
-      {props.children}
+      {React.cloneElement(props.children, {
+        fontColor:
+          props.styleClasses === 'bg-red-base' ? 'text-white' : 'text-red-base'
+      })}
     </section>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Section from '../Sections/Section'
 import Home from '../Sections/Home/Home'
+import About from '../Sections/About/About'
 import LanguageSelector from './LanguageSelector/LanguageSelector'
 
 export default class Page extends React.Component {
@@ -13,7 +14,10 @@ export default class Page extends React.Component {
 
     this.languages = ['english', 'español']
 
-    this.sections = [{ section: <Home />, ref: React.createRef() }]
+    this.sections = [
+      { section: <Home />, ref: React.createRef() },
+      { section: <About />, ref: React.createRef() }
+    ]
   }
 
   toggleLanguage = () => {
@@ -32,26 +36,29 @@ export default class Page extends React.Component {
 
   render = () => {
     return (
-      <div
-        className={`w-screen relative transition-all-50 ${this.getOpacity()}`}
-      >
-        <LanguageSelector
-          language={this.languages[this.state.language]}
-          toggle={this.toggleLanguage}
-        />
-
-        {this.sections.map((s, i) => {
-          return (
-            <Section
-              key={`section-${i}`}
-              innerRef={s.ref}
-              styleClasses={i % 2 ? 'bg-red-base' : 'bg-white'}
-            >
-              {this.renderSectionWithLanguage(s.section)}
-            </Section>
-          )
-        })}
-      </div>
+      <React.Fragment>
+        {this.props.animationOver && (
+          <LanguageSelector
+            language={this.languages[this.state.language]}
+            toggle={this.toggleLanguage}
+          />
+        )}
+        <div
+          className={`h-screen w-screen relative transition-all-50 ${this.getOpacity()} overflow-y-scroll`}
+        >
+          {this.sections.map((s, i) => {
+            return (
+              <Section
+                key={`section-${i}`}
+                innerRef={s.ref}
+                styleClasses={i % 2 ? 'bg-red-base' : 'bg-white'}
+              >
+                {this.renderSectionWithLanguage(s.section)}
+              </Section>
+            )
+          })}
+        </div>
+      </React.Fragment>
     )
   }
 }

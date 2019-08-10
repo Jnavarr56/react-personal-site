@@ -6,7 +6,7 @@ import './LanguageSelector.css'
 
 const LanguageSelector = props => {
   return (
-    <div className="flex justify-center items-center pt-6 pr-6 sm:pt-16 sm:pr-24 fixed z-999999 top-0 right-0">
+    <div className="fixed top-0 right-0 z-999999 flex justify-center items-center pt-5 pr-5 sm:pt-16 sm:pr-24">
       <span className="font-primary mr-2 sm:text-xl">
         <Translateable text={props.language} />
       </span>

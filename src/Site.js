@@ -24,7 +24,8 @@ export default class Site extends React.Component {
     const scrollable = showAnimation ? 'overflow-hidden' : 'overflow-scroll'
 
     return (
-      <div className={`h-screen w-screen ${scrollable} relative`}>
+      // <div className={`h-screen w-screen ${scrollable} relative`}>
+      <div className={`w-screen overflow-hidden relative`}>
         {showAnimation && (
           <LandingAnimation
             animationOver={animationOver}
