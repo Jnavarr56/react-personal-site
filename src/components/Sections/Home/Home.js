@@ -110,7 +110,7 @@ export default class Home extends React.Component {
     await client.repos.list(repoQueryParams).then(
       async ({ data }) => {
         const repoEventsQueryParams = {
-          repo: data[1].name, //Testing with this repo
+          repo: data[0].name,
           owner: process.env.REACT_APP_GITHUB_USERNAME
         }
 
@@ -390,12 +390,12 @@ export default class Home extends React.Component {
           <h1 className="text-black text-center text-2xl sm:text-6xl font-primary">
             Jorge Andrés Navarro
           </h1>
-          <p className="text-black text-center text-xl sm:text-4xl tracking-widest uppercase">
+          <p className="text-black text-center text-xl sm:text-4xl tracking-widest uppercase font-thin">
             <Translateable text={subtitle} />
           </p>
           <Button
             onClick={this.handleOpenModalClick}
-            className="bg-red-base mt-0 sm:mt-10 p-2 sm:p-4 rounded text-white text-xs sm:text-sm font-primary shadow-2xl tracking-widest uppercase w-full"
+            className="bg-red-base mt-0 sm:mt-10 p-2 sm:p-4 rounded text-white text-xs sm:text-sm font-primary shadow-2xl tracking-widest uppercase w-full font-thin"
           >
             <Translateable text={this.text.button[this.props.language]} />
           </Button>
