@@ -2,8 +2,6 @@ import React from 'react'
 
 const Section = props => {
   const { innerRef, children, language, title, backgroundColor } = props
-
-  console.log(language)
   const fontColor = 'bg-red-base' ? 'text-white' : 'text-red-base'
 
   return (

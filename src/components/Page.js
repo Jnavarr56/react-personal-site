@@ -1,5 +1,5 @@
 import React from 'react'
-import Section from '../Sections/Section'
+import Section from './Section'
 import LanguageSelector from './LanguageSelector/LanguageSelector'
 
 export default class Page extends React.Component {
@@ -42,8 +42,8 @@ export default class Page extends React.Component {
     })
   }
 
-  handleLanguageChange = () => {
-    this.setState(({ language }) => ({ language: language ? 0 : 1 }))
+  handleLanguageChange = language => {
+    this.setState({ language: language ? 1 : 0 })
   }
 
   render = () => {
@@ -58,9 +58,12 @@ export default class Page extends React.Component {
     const { transition } = this.props
 
     return (
-      <div className={`h-screen w-screen ${transition} ${opacity} ${scroll}`}>
-        {this._renderSections()}
-      </div>
+      <React.Fragment>
+        <LanguageSelector language={this.state.language} onChange={this.handleLanguageChange} />
+        <div className={`h-screen w-screen ${transition} ${opacity} ${scroll}`}>
+          {this._renderSections()}
+        </div>
+      </React.Fragment>
     )
   }
 }

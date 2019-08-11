@@ -1,5 +1,5 @@
 import React from 'react'
-import Translateable from '../../../Translateable/Translateable'
+import Translateable from '../../../Translateable'
 import {
   GoGitCommit,
   GoTerminal,
@@ -52,7 +52,6 @@ export default class ContentSwitcher extends React.Component {
       summaryIcon = <GoTerminal className="text-red-base text-5xl" />
     }
 
-    console.log(summaryIcon)
     const stamp = moment(this.props.createdAt)
     stamp.locale(this.props.language.slice(0, 2))
 

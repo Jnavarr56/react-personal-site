@@ -1,10 +1,10 @@
 import React from 'react'
 import OctoKit from '@octokit/rest'
-import Translateable from '../../Translateable/Translateable'
+import Translateable from '../../Translateable'
 import particles from './ParticleConfig'
 import IconLinks from './IconLinks/IconLinks'
 import Button from '../../Button/FlashButton'
-import Modal from '../../Modal/Modal'
+import Modal from '../../Modal'
 import ReactLoading from 'react-loading'
 import { MdClose, MdWarning } from 'react-icons/md'
 import { GoOctoface } from 'react-icons/go'
@@ -390,7 +390,7 @@ export default class Home extends React.Component {
           <h1 className="text-black text-center text-2xl sm:text-6xl font-primary">
             Jorge Andrés Navarro
           </h1>
-          <p className="text-black text-center text-xl sm:text-4xl tracking-widest uppercase font-thin">
+          <p className="text-black text-center text-xl sm:text-5xl tracking-widest uppercase font-thin">
             <Translateable text={subtitle} />
           </p>
           <Button

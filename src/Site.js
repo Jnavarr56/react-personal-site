@@ -1,6 +1,6 @@
 import React from 'react'
 import LandingAnimation from './components/LandingAnimation/LandingAnimation'
-import Page from './components/Page/Page'
+import Page from './components/Page'
 import Home from './components/Sections/Home/Home'
 import About from './components/Sections/About/About'
 
@@ -44,9 +44,9 @@ export default class Site extends React.Component {
           />
         ) : (
           <LandingAnimation
-            countUpInterval={20}
-            fadeOutDelay={10000}
-            fadeOutDuration={5000}
+            countUpInterval={15}
+            fadeOutDelay={250}
+            fadeOutDuration={500}
             transition={'transition-all-50'}
             onAnimationOver={this.handleAnimationOver}
           />

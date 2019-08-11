@@ -14,10 +14,30 @@ export default class IconsLinks extends React.Component {
     super(props)
 
     this.icons = [
-      { normal: blackCodepen, hover: redCodepen },
-      { normal: blackGithub, hover: redGithub },
-      { normal: blackAngellist, hover: redAngellist },
-      { normal: blackLinkedinlogo, hover: redLinkedinlogo }
+      {
+        normal: blackCodepen,
+        hover: redCodepen,
+        alt: 'codepen',
+        link: 'https://codepen.io/collection/DQvVZN/'
+      },
+      {
+        normal: blackGithub,
+        hover: redGithub,
+        alt: 'github',
+        link: 'https://github.com/Jnavarr56'
+      },
+      {
+        normal: blackAngellist,
+        hover: redAngellist,
+        alt: 'angellist',
+        link: 'https://angel.co/jorge-navarro'
+      },
+      {
+        normal: blackLinkedinlogo,
+        hover: redLinkedinlogo,
+        alt: 'linkedin',
+        link: 'https://www.linkedin.com/in/jnavarr5/'
+      }
     ]
   }
 
