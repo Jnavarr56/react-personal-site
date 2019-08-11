@@ -1,15 +1,18 @@
 import React from 'react'
 
 const Section = props => {
+  const { innerRef, children, language, title, backgroundColor } = props
+
+  console.log(language)
+  const fontColor = 'bg-red-base' ? 'text-white' : 'text-red-base'
+
   return (
     <section
-      className={`h-screen w-screen relative ${props.styleClasses}`}
-      ref={props.innerRef}
+      className={`h-screen w-screen relative ${backgroundColor}`}
+      ref={innerRef}
     >
-      {React.cloneElement(props.children, {
-        fontColor:
-          props.styleClasses === 'bg-red-base' ? 'text-white' : 'text-red-base'
-      })}
+      {/* Title Component Will Go Here title[language]*/}
+      {React.cloneElement(children, { fontColor, language })}
     </section>
   )
 }

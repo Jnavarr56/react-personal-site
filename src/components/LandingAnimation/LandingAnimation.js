@@ -1,6 +1,5 @@
 import React from 'react'
 import ParticleConfig from './ParticleConfig'
-import { MdFilterTiltShift } from 'react-icons/md'
 
 export default class LandingAnimation extends React.Component {
   constructor(props) {

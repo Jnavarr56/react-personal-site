@@ -1,6 +1,8 @@
 import React from 'react'
-import Page from './components/Page/Page'
 import LandingAnimation from './components/LandingAnimation/LandingAnimation'
+import Page from './components/Page/Page'
+import Home from './components/Sections/Home/Home'
+import About from './components/Sections/About/About'
 
 export default class Site extends React.Component {
   constructor(props) {
@@ -30,10 +32,16 @@ export default class Site extends React.Component {
   }
 
   render = () => {
+    const sections = [{ section: <Home /> }, { section: <About /> }]
+
     return (
       <div className={`h-screen w-screen overflow-y-scroll relative`}>
         {this._getVisited() ? (
-          <Page />
+          <Page
+            transition={'transition-all-50'}
+            scrollable={true}
+            sections={sections}
+          />
         ) : (
           <LandingAnimation
             countUpInterval={20}
