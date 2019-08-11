@@ -57,7 +57,7 @@ export default class ContentSwitcher extends React.Component {
 
     return (
       <div
-        className={`w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative h-40 scrollbar-y-visible`}
+        className={`h-full w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative scrollbar-y-visible px-3`}
         style={{ left }}
       >
         <div className="mb-3 hidden sm:block">{summaryIcon}</div>
@@ -80,7 +80,7 @@ export default class ContentSwitcher extends React.Component {
     return (
       <div
         key={`c-${idx}`}
-        className={`w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative h-40 scrollbar-y-visible`}
+        className={`h-full w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative scrollbar-y-visible px-3`}
         style={{ left: `-${this.state.section * 100}%` }}
       >
         <GoGitCommit className="text-red-base text-5xl" />
@@ -103,13 +103,13 @@ export default class ContentSwitcher extends React.Component {
       : [this.renderSummary()]
 
     return (
-      <div className="h-full w-full flex justify-start items-start relative pt-4 px-4 sm:px-2">
+      <div className="h-full w-full flex justify-start items-start relative pt-4">
         {sections.map((c, i) => {
           if (!i) return c
           else return this.renderCommits(c, i)
         })}
 
-        <div className="w-full flex-grow flex justify-center items-start h-8 pb-2">
+        <div className="w-full absolute flex justify-center items-start h-8 pb-2 bottom-0 left-0">
           {this.props.commits &&
             sections.map((c, i) => {
               const bg = this.state.section === i ? 'bg-red-base' : 'bg-white'

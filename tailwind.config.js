@@ -17,7 +17,8 @@ module.exports = {
       },
       colors: {
         red: {
-          base: "#FF0000"
+          base: "#FF0000",
+          'base-hover': '#d10000'
         }
       },
       height: {

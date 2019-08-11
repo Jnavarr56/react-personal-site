@@ -1,5 +1,7 @@
 import React from 'react'
 import Translateable from '../../Translateable'
+import SwipeableViews from 'react-swipeable-views'
+// import Pagination from 'react-swipeable-views-utils/com/
 
 export default class About extends React.Component {
   constructor(props) {
@@ -8,31 +10,54 @@ export default class About extends React.Component {
 
     this.copy = {
       0: {
-        english:
-          'Master of Science in Comp Sci student + Bootcamp grad currently looking for first developer role. ',
-        español:
-          'Soy un adicto a los datos que se convirtió en un desarrollador con una pasión por resolver problemas.'
+        english: 'Swipe left to learn more!',
+        español: '¡Deslizar hacia la izquierda para ver más!'
       },
       1: {
         english:
-          "I'm a 23 year old NYC based bilingual Full-Stack developer with an Economics degree currently looking for junior/entry level roles in software development or QA. I began with Bootstrap/Ruby on Rails but have transitioned to React.js/Redux and Node.js/Express. I'm highly adaptable and never shy away from a challenge or unfamiliar technology. Take a look a around here for more info and some of my featured work. ",
+          "I'm a 23 year old, bilingual, MS in Comp Sci candidate and Bootcamp grad with a React.js/Node.js internship under my belt.",
         español:
-          'Soy un desarrollador bilingüe Full-Stack de 23 años con base en la Ciudad de Nueva York con un diploma de Economia. Actualmente en busca de roles de nivel junior / entrada en desarrollo o control de calidad. Comencé con Bootstrap / Rails pero me estoy expandiendo para trabajar con React.JS / Redux y Node.JS. Soy altamente Adaptable y nunca huir de un desafío o tecnología desconocida. Echar un vistazo a por aquí para más información y algunos de mis trabajos destacados.'
+          'Soy un candidato para maestría en ciencias de la ciencias de la computación y que acabo de terminar una pasantía "full stack" (React.js/Node.js).'
       },
       2: {
         english:
-          'Think I could be your next great hire? Feel free to contact me for this or anything at all.',
+          "I'm based in NYC and looking for full-stack opportunities, but am totally open to QA/front-end engineering positions.",
         español:
-          'Creo que podría ser tu próximo gran ¿alquiler? No dude en ponerse en contacto conmigo para esto o cualquier cosa en absoluto.'
+          'Vivo en Nueva York y estoy buscando opportunidades full stack pero tambie estoy abierto a positiones de control de calidad o en ingenieria "front-end".'
       },
       3: {
-        english: 'Puedes descargar mi curriculum vitae aqui.',
-        español: ''
+        english:
+          "Besides my software development internship experience, I have experience in corporate restructuring and a bachelor's degree in Economics.",
+        español:
+          'He trabajado en reestructuración corporativa y hice la liceniatura en Economia.'
       },
       4: {
-        english: 'This site runs on React.js and Tailwind.css.',
+        english:
+          'I began with Ruby on Rails but have since migrated to a JavaScript based stack.',
         español:
-          'Este sitio se ejecuta completamente con React.js y Tailwind.css.'
+          'Empecé con "Ruby on Rails" pero ahora trabajo con un "stack" basado en JavaScript.'
+      },
+      5: {
+        english:
+          "Most recently, I've been focusing on Next.js, GraphQL, Tailwind.css, and learning about Hooks in React 16.8.",
+        español:
+          'Recientemente, me he enfocado en Next.js, GraphQL, Tailwind.css y aprender acerca de "Hooks" en React 16.8.'
+      },
+      6: {
+        english:
+          "I've built production components in React-Native and would love to expand my mobile development skills.",
+        español:
+          'He trabajdo en "components" por un producto en React-Native y quisiera expandir mi capacidad de desarrollo móvil.'
+      },
+      7: {
+        english:
+          'Think I could be your next great hire? Feel free to reach out!',
+        español: '¿Crees que podría ser tu próxima gran contratación?'
+      },
+      8: {
+        english:
+          'This site was built with Create-React-App and a number of libraries you can find at this repo.',
+        español: 'Esta pagina se hico con Create-React-App.'
       }
     }
   }
@@ -42,27 +67,74 @@ export default class About extends React.Component {
     const { copy } = this
 
     return (
-      <div className="h-full w-full flex flex-col justify-center items-center">
-        <div className="w-full px-1 sm:px-3 flex flex-col justify-start">
-          <p className={'text-left ' + fontColor}>
+      <div className="h-full w-full flex justify-center items-start pt-20 sm:pt-32">
+        <div className="w-full flex items-center justify-center sm:hidden px-3">
+          {/* <p className={'text-left text-sm ' + fontColor}>
             <Translateable text={copy[0][language]} />
-          </p>
-          <br />
-          <p className={'text-left ' + fontColor}>
+            <br /><br />
             <Translateable text={copy[1][language]} />
-          </p>
-          <br />
-          <p className={'text-left ' + fontColor}>
+            <br /><br />
             <Translateable text={copy[2][language]} />
-          </p>
-          <br />
-          <p className={'text-left ' + fontColor}>
+            <br /><br />
             <Translateable text={copy[3][language]} />
-          </p>
-          <br />
-          <p className={'text-left ' + fontColor}>
+            <br /><br />
             <Translateable text={copy[4][language]} />
-          </p>
+          </p> */}
+
+          {/* <p className={'text-left text-sm ' + fontColor}>
+            <Translateable text={copy[0][language]} />
+            <br /><br />
+            <Translateable text={copy[1][language]} />
+            <br /><br />
+            <Translateable text={copy[2][language]} />
+            <br /><br />
+            <Translateable text={copy[3][language]} />
+            <br /><br />
+            <Translateable text={copy[4][language]} />
+          </p> */}
+
+          <SwipeableViews enableMouseEvents={true} circular={true}>
+            <div className="pt-5">
+              <p className={fontColor}>
+                <Translateable fontColor={fontColor} text={copy[1][language]} />
+                <br />
+                <br />
+                <Translateable fontColor={fontColor} text={copy[3][language]} />
+                <br />
+                <br />
+                <Translateable fontColor={fontColor} text={copy[2][language]} />
+                <br />
+                <br />
+                <em className="font-bold">
+                  <Translateable
+                    fontColor={fontColor}
+                    text={copy[0][language]}
+                  />
+                </em>
+              </p>
+            </div>
+            <div className="pt-5">
+              <p className={fontColor}>
+                <Translateable text={copy[4][language]} />
+                <br />
+                <br />
+                <Translateable text={copy[5][language]} />
+                <br />
+                <br />
+                <Translateable text={copy[6][language]} />
+                <br />
+                <br />
+              </p>
+            </div>
+            <div className="pt-5">
+              <p className={fontColor}>
+                <Translateable text={copy[7][language]} />
+                <br />
+                <br />
+                <Translateable text={copy[8][language]} />
+              </p>
+            </div>
+          </SwipeableViews>
         </div>
       </div>
     )

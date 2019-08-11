@@ -20,7 +20,7 @@ export default class Home extends React.Component {
       loading: false,
       data: null,
       error: null,
-      dataSelector: 0
+      dataSelector: 4
     }
 
     this.state = {
@@ -30,7 +30,13 @@ export default class Home extends React.Component {
     this.text = {
       subtitle: {
         english: 'Full Stack Developer',
-        español: 'Desarrollador Full Stack'
+        español: (
+          <span>
+            Desarrollador
+            <br className="sm:hidden" />
+            <span> </span>Full Stack
+          </span>
+        )
       },
       button: {
         english: 'View Latest Public Git Action',
@@ -151,7 +157,7 @@ export default class Home extends React.Component {
     if (this.state.loading) {
       return (
         <ReactLoading
-          type={'cylon'}
+          type={'spin'}
           color={'red'}
           height={'10rem'}
           width={'10rem'}
@@ -355,7 +361,7 @@ export default class Home extends React.Component {
 
   renderModalContainer = () => {
     return (
-      <div className="w-screen h-100 md:w-200 flex flex-col justify-start items-center">
+      <div className="w-screen md:w-200 flex flex-col justify-start items-center">
         <div className="rounded overflow-hidden bg-black h-full w-full flex flex-col justify-start items-center">
           <div className="w-full border-b border-red-base flex justify-between p-3">
             {this.state.error ? (
@@ -387,15 +393,15 @@ export default class Home extends React.Component {
         ></div>
         <IconLinks />
         <div className="z-50 bg-white-opacity-75 flex flex-col items-center px-3">
-          <h1 className="text-black text-center text-2xl sm:text-6xl md:text-7xl font-primary">
+          <h1 className="text-black text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-primary">
             Jorge Andrés Navarro
           </h1>
-          <p className="text-black text-center text-xl sm:text-5xl md:text-6xl tracking-widest uppercase font-thin">
+          <p className="text-black text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-widest uppercase font-thin">
             <Translateable text={subtitle} />
           </p>
           <Button
             onClick={this.handleOpenModalClick}
-            className="bg-red-base mt-0 sm:mt-10 p-2 sm:p-4 rounded text-white text-xs sm:text-sm font-primary shadow-2xl tracking-widest uppercase w-full font-thin"
+            className="mt-1 sm:mt-4 p-2 sm:p-4 rounded text-white text-xs sm:text-sm font-primary shadow-2xl tracking-widest uppercase w-full font-thin bg-red-base hover:bg-red-base-hover"
           >
             <Translateable text={this.text.button[this.props.language]} />
           </Button>

@@ -35,10 +35,11 @@ class LanguageSelector extends React.Component {
   }
 
   render = () => {
-    const checked = <p>esp</p>
-    const unchecked = <p>eng</p>
+    const { transition, opacity } = this.props
     return (
-      <div className="fixed top-0 right-0 z-999999 flex justify-center items-center pt-5 pr-5 sm:pt-12 sm:pr-24">
+      <div
+        className={`fixed top-0 right-0 z-999999 flex justify-center items-center pt-5 pr-5 sm:pt-12 sm:pr-24 ${transition} ${opacity}`}
+      >
         <Switch
           checked={this.props.language ? true : false}
           onChange={this.props.onChange}

@@ -53,7 +53,7 @@ export default class Site extends React.Component {
           />
         ) : (
           <LandingAnimation
-            countUpInterval={15}
+            countUpInterval={20}
             fadeOutDelay={250}
             fadeOutDuration={500}
             transition={'transition-all-50'}

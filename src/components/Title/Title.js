@@ -36,15 +36,15 @@ export default class Title extends React.Component {
     })
 
     return (
-      <div className="w-full absolute pl-4 pt-4 sm:pl-12 sm:pt-12 top-0 overflow-hidden hidden sm:block">
-        <h3 className={`${this.props.fontColor} text-2xl sm:text-5xl`}>
-          <Translateable ref={this.translateEl} text={text} />
-          <Waypoint
-            onEnter={() => this.setState({ inView: true })}
-            onLeave={() => this.setState({ inView: false })}
-          />
-        </h3>
-      </div>
+      <h3
+        className={`${this.props.fontColor} font-thin text-2xl sm:text-5xl pt-8 pl-4 sm:pt-10 sm:pl-16 absolute top-0 left-0`}
+      >
+        <Translateable ref={this.translateEl} text={text} />
+        <Waypoint
+          onEnter={() => this.setState({ inView: true })}
+          onLeave={() => this.setState({ inView: false })}
+        />
+      </h3>
     )
   }
 }

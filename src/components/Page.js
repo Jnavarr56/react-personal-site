@@ -18,7 +18,9 @@ export default class Page extends React.Component {
   componentDidMount = () => {
     const sections = this._withRefs(this.props.sections)
 
-    this.setState({ fadeIn: true, sections })
+    setTimeout(() => {
+      this.setState({ fadeIn: true, sections })
+    }, 500)
   }
 
   _withRefs = secs => {
@@ -62,6 +64,8 @@ export default class Page extends React.Component {
         <LanguageSelector
           language={this.state.language}
           onChange={this.handleLanguageChange}
+          transition={transition}
+          opacity={opacity}
         />
         <div className={`h-screen w-screen ${transition} ${opacity} ${scroll}`}>
           {this._renderSections()}
