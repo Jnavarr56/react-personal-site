@@ -153,8 +153,8 @@ export default class Home extends React.Component {
         <ReactLoading
           type={'cylon'}
           color={'red'}
-          height={'7rem'}
-          width={'7rem'}
+          height={'10rem'}
+          width={'10rem'}
         />
       )
     } else {

@@ -109,9 +109,9 @@ export default class ContentSwitcher extends React.Component {
           else return this.renderCommits(c, i)
         })}
 
-        {this.props.commits && (
-          <div className="w-full flex justify-center items-start absolute bottom-0 left-0 h-8 pb-2">
-            {sections.map((c, i) => {
+        <div className="w-full flex-grow flex justify-center items-start h-8 pb-2">
+          {this.props.commits &&
+            sections.map((c, i) => {
               const bg = this.state.section === i ? 'bg-red-base' : 'bg-white'
 
               return (
@@ -122,8 +122,7 @@ export default class ContentSwitcher extends React.Component {
                 ></div>
               )
             })}
-          </div>
-        )}
+        </div>
       </div>
     )
   }
