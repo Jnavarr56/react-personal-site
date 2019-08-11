@@ -387,10 +387,10 @@ export default class Home extends React.Component {
         ></div>
         <IconLinks />
         <div className="z-50 bg-white-opacity-75 flex flex-col items-center px-3">
-          <h1 className="text-black text-center text-2xl sm:text-6xl font-primary">
+          <h1 className="text-black text-center text-2xl sm:text-6xl md:text-7xl font-primary">
             Jorge Andrés Navarro
           </h1>
-          <p className="text-black text-center text-xl sm:text-5xl tracking-widest uppercase font-thin">
+          <p className="text-black text-center text-xl sm:text-5xl md:text-6xl tracking-widest uppercase font-thin">
             <Translateable text={subtitle} />
           </p>
           <Button
