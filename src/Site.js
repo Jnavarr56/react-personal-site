@@ -32,7 +32,16 @@ export default class Site extends React.Component {
   }
 
   render = () => {
-    const sections = [{ section: <Home /> }, { section: <About /> }]
+    const sections = [
+      { section: <Home /> },
+      {
+        section: <About />,
+        title: {
+          english: 'About',
+          español: 'Sobre Mi'
+        }
+      }
+    ]
 
     return (
       <div className={`h-screen w-screen overflow-y-scroll relative`}>

@@ -20,6 +20,9 @@ module.exports = {
           base: "#FF0000"
         }
       },
+      height: {
+        "100": "25rem"
+      },
       width: {
         "200": "50rem",
         "100": "25rem"

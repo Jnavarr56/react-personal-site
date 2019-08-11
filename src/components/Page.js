@@ -35,7 +35,7 @@ export default class Page extends React.Component {
         innerRef: s.ref,
         backgroundColor: i % 2 ? 'bg-red-base' : 'bg-white',
         language: this._getLanguage(),
-        title: null
+        title: s.title
       }
 
       return <Section {...sectionProps}>{s.section}</Section>
@@ -59,7 +59,10 @@ export default class Page extends React.Component {
 
     return (
       <React.Fragment>
-        <LanguageSelector language={this.state.language} onChange={this.handleLanguageChange} />
+        <LanguageSelector
+          language={this.state.language}
+          onChange={this.handleLanguageChange}
+        />
         <div className={`h-screen w-screen ${transition} ${opacity} ${scroll}`}>
           {this._renderSections()}
         </div>

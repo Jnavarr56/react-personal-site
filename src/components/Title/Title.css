@@ -1,0 +1,9 @@
+.title-char-out-of-view {
+    transform: translate(0, -150%);
+}
+.title-char-in-view {
+    transform: translate(0, 0);
+}
+
+
+

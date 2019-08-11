@@ -1,4 +1,5 @@
 import React from 'react'
+import Title from './Title/Title'
 
 const Section = props => {
   const { innerRef, children, language, title, backgroundColor } = props
@@ -9,7 +10,7 @@ const Section = props => {
       className={`h-screen w-screen relative ${backgroundColor}`}
       ref={innerRef}
     >
-      {/* Title Component Will Go Here title[language]*/}
+      {title && <Title fontColor={fontColor} text={title[language]} />}
       {React.cloneElement(children, { fontColor, language })}
     </section>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+const Splitting = require('splitting')
 
 export default class Translateable extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ export default class Translateable extends React.Component {
       fadingOut: 'opacity-0 blur-10',
       fadingIn: 'opacity-100 blur-0'
     }
+
+    this.textElement = React.createRef()
   }
 
   componentDidMount = () => {

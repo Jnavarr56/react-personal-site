@@ -355,7 +355,7 @@ export default class Home extends React.Component {
 
   renderModalContainer = () => {
     return (
-      <div className="h-64 w-screen md:h-100 md:w-200 flex flex-col justify-start items-center">
+      <div className="w-screen h-100 md:w-200 flex flex-col justify-start items-center">
         <div className="rounded overflow-hidden bg-black h-full w-full flex flex-col justify-start items-center">
           <div className="w-full border-b border-red-base flex justify-between p-3">
             {this.state.error ? (
