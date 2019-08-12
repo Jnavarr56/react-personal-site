@@ -7386,6 +7386,11 @@ video {
           filter: blur(20px);
 }
 
+.scale-small {
+  -webkit-transform: scale(.50, .50);
+          transform: scale(.50, .50);
+}
+
 .transition-all-25 {
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;

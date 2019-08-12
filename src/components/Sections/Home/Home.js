@@ -20,7 +20,7 @@ export default class Home extends React.Component {
       loading: false,
       data: null,
       error: null,
-      dataSelector: 4
+      dataSelector: 0
     }
 
     this.state = {

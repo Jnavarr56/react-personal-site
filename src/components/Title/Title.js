@@ -37,7 +37,7 @@ export default class Title extends React.Component {
 
     return (
       <h3
-        className={`${this.props.fontColor} font-thin text-2xl sm:text-5xl pt-8 pl-4 sm:pt-10 sm:pl-16 absolute top-0 left-0`}
+        className={`${this.props.fontColor} font-thin text-2xl sm:text-5xl pt-4 pl-4 sm:pt-10 sm:pl-16 absolute top-0 left-0`}
       >
         <Translateable ref={this.translateEl} text={text} />
         <Waypoint

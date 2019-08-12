@@ -16,6 +16,10 @@
   filter: blur(20px);
 }
 
+.scale-small {
+  transform: scale(.50, .50);
+}
+
 .transition-all-25 {
   transition: all 0.25s ease;
 }

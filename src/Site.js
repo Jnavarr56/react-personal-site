@@ -35,7 +35,7 @@ export default class Site extends React.Component {
     const sections = [
       { section: <Home /> },
       {
-        section: <About />,
+        section: <About transition={'transition-all-50'} />,
         title: {
           english: 'About',
           español: 'Sobre Mi'

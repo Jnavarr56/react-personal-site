@@ -1,12 +1,15 @@
 import React from 'react'
 import Translateable from '../../Translateable'
 import SwipeableViews from 'react-swipeable-views'
-// import Pagination from 'react-swipeable-views-utils/com/
+import { Waypoint } from 'react-waypoint'
 
 export default class About extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      index: 0,
+      fadeIn: false
+    }
 
     this.copy = {
       0: {
@@ -17,13 +20,13 @@ export default class About extends React.Component {
         english:
           "I'm a 23 year old, bilingual, MS in Comp Sci candidate and Bootcamp grad with a React.js/Node.js internship under my belt.",
         español:
-          'Soy un candidato para maestría en ciencias de la ciencias de la computación y que acabo de terminar una pasantía "full stack" (React.js/Node.js).'
+          'Soy un candidato para maestría en ciencias de la computación y que acabo de terminar una pasantía "full stack" (React.js/Node.js).'
       },
       2: {
         english:
           "I'm based in NYC and looking for full-stack opportunities, but am totally open to QA/front-end engineering positions.",
         español:
-          'Vivo en Nueva York y estoy buscando opportunidades full stack pero tambie estoy abierto a positiones de control de calidad o en ingenieria "front-end".'
+          'Vivo en Nueva York y estoy buscando opportunidades full stack pero tambien estoy abierto a positiones de control de calidad o en ingenieria "front-end".'
       },
       3: {
         english:
@@ -52,7 +55,8 @@ export default class About extends React.Component {
       7: {
         english:
           'Think I could be your next great hire? Feel free to reach out!',
-        español: '¿Crees que podría ser tu próxima gran contratación?'
+        español:
+          '¿Crees que podría ser tu próxima gran contratación? Contáctenme!'
       },
       8: {
         english:
@@ -62,79 +66,154 @@ export default class About extends React.Component {
     }
   }
 
-  render = () => {
-    const { fontColor, language } = this.props
-    const { copy } = this
+  handleChangeIndex = (index, old, meta) => {
+    console.log(index, old, meta)
+    this.setState({ index })
+  }
+
+  handleSwitching = (percent, type, slides) => {
+    console.log(percent, type)
+    if (type === 'end') {
+      if (percent === slides.length - 1) this.setState({ index: 0 })
+      else if (percent === 0) {
+        this.setState({ index: slides.length - 1 })
+      }
+    }
+  }
+
+  renderMobileView = (copy, fontColor, language) => {
+    const slides = [
+      <div className="flex justify-start pt-5 pl-1 break-all">
+        <p className={fontColor}>
+          <Translateable text={copy[1][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[3][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[2][language]} />
+          <br />
+          <br />
+          <em className="font-bold">
+            <Translateable text={copy[0][language]} />
+          </em>
+        </p>
+      </div>,
+      <div className="pt-5 pl-1 break-all">
+        <p className={fontColor}>
+          <Translateable text={copy[4][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[5][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[6][language]} />
+          <br />
+          <br />
+        </p>
+      </div>,
+      <div className="pt-5 pl-1 break-all">
+        <p className={fontColor}>
+          <Translateable text={copy[7][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[8][language]} />
+          <br />
+        </p>
+      </div>
+    ]
 
     return (
-      <div className="h-full w-full flex justify-center items-start pt-20 sm:pt-32">
-        <div className="w-full flex items-center justify-center sm:hidden px-3">
-          {/* <p className={'text-left text-sm ' + fontColor}>
-            <Translateable text={copy[0][language]} />
-            <br /><br />
-            <Translateable text={copy[1][language]} />
-            <br /><br />
-            <Translateable text={copy[2][language]} />
-            <br /><br />
-            <Translateable text={copy[3][language]} />
-            <br /><br />
-            <Translateable text={copy[4][language]} />
-          </p> */}
+      <React.Fragment>
+        <SwipeableViews
+          index={this.state.index}
+          enableMouseEvents={true}
+          onSwitching={(p, type) => this.handleSwitching(p, type, slides)}
+          onChangeIndex={this.handleChangeIndex}
+        >
+          {slides}
+        </SwipeableViews>
+        <div className="absolute bottom-0 left-0 w-full flex justify-center items-center pb-8">
+          {slides.map((s, index) => {
+            const bg = index === this.state.index ? 'bg-white' : 'bg-base-red'
+            return (
+              <div
+                className={`${bg} rounded-full transition-all-50 border border-white h-5 w-5 mx-2`}
+                onClick={() => this.setState({ index })}
+              ></div>
+            )
+          })}
+        </div>
+        <Waypoint
+          onEnter={() => this.handleFade(true)}
+          onLeave={() => this.handleFade(false)}
+        />
+      </React.Fragment>
+    )
+  }
 
-          {/* <p className={'text-left text-sm ' + fontColor}>
-            <Translateable text={copy[0][language]} />
-            <br /><br />
-            <Translateable text={copy[1][language]} />
-            <br /><br />
-            <Translateable text={copy[2][language]} />
-            <br /><br />
-            <Translateable text={copy[3][language]} />
-            <br /><br />
-            <Translateable text={copy[4][language]} />
-          </p> */}
+  renderLargeView = (copy, fontColor, language) => {
+    return (
+      <p className={`${fontColor} text-lg md:text-xl`}>
+        <Translateable text={copy[1][language]} />
+        <br />
+        <br />
+        <Translateable text={copy[3][language]} />
+        <br />
+        <br />
+        <Translateable text={copy[2][language]} />
+        <br />
+        <br />
+        <Translateable text={copy[4][language]} />
+        <br />
+        <br />
+        <Translateable text={copy[5][language]} />
+        <br />
+        <br />
+        <Translateable text={copy[6][language]} />
+        <br />
+        <br />
+        <Translateable text={copy[7][language]} />
+        <br />
+        <br />
+        <Translateable text={copy[8][language]} />
+      </p>
+    )
+  }
 
-          <SwipeableViews enableMouseEvents={true} circular={true}>
-            <div className="pt-5">
-              <p className={fontColor}>
-                <Translateable fontColor={fontColor} text={copy[1][language]} />
-                <br />
-                <br />
-                <Translateable fontColor={fontColor} text={copy[3][language]} />
-                <br />
-                <br />
-                <Translateable fontColor={fontColor} text={copy[2][language]} />
-                <br />
-                <br />
-                <em className="font-bold">
-                  <Translateable
-                    fontColor={fontColor}
-                    text={copy[0][language]}
-                  />
-                </em>
-              </p>
-            </div>
-            <div className="pt-5">
-              <p className={fontColor}>
-                <Translateable text={copy[4][language]} />
-                <br />
-                <br />
-                <Translateable text={copy[5][language]} />
-                <br />
-                <br />
-                <Translateable text={copy[6][language]} />
-                <br />
-                <br />
-              </p>
-            </div>
-            <div className="pt-5">
-              <p className={fontColor}>
-                <Translateable text={copy[7][language]} />
-                <br />
-                <br />
-                <Translateable text={copy[8][language]} />
-              </p>
-            </div>
-          </SwipeableViews>
+  handleFade = on => {
+    if (this.state.fadeIn !== on) {
+      this.setState({ fadeIn: on })
+    }
+  }
+
+  render = () => {
+    const fade = this.state.fadeIn
+      ? 'opacity-100 blur-0'
+      : 'opacity-0 blur-10 scale-small'
+    const transition = this.props.transition
+
+    return (
+      <div
+        className={`h-full w-full flex justify-center items-start pt-20 sm:pt-32 md:pt-48 ${transition} ${fade} relative`}
+      >
+        <div className="w-full flex flex-col items-center justify-center sm:hidden px-3">
+          {this.renderMobileView(
+            this.copy,
+            this.props.fontColor,
+            this.props.language
+          )}
+        </div>
+        <div className="w-full hidden sm:flex flex-col items-center justify-center sm:px-16 md:items-start">
+          {this.renderLargeView(
+            this.copy,
+            this.props.fontColor,
+            this.props.language
+          )}
+          <Waypoint
+            onEnter={() => this.handleFade(true)}
+            onLeave={() => this.handleFade(false)}
+          />
         </div>
       </div>
     )
