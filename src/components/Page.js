@@ -12,6 +12,8 @@ export default class Page extends React.Component {
       sections: []
     }
 
+    this.page = React.createRef()
+
     this.languages = ['english', 'español']
   }
 
@@ -37,10 +39,17 @@ export default class Page extends React.Component {
         innerRef: s.ref,
         backgroundColor: i % 2 ? 'bg-red-base' : 'bg-white',
         language: this._getLanguage(),
-        title: s.title
+        title: s.title,
+        page: this.page,
+        fadeable: i ? true : false,
+        transition: 'transition-all-50'
       }
 
-      return <Section {...sectionProps}>{s.section}</Section>
+      return (
+        <Section key={`section-${i}`} {...sectionProps}>
+          {s.section}
+        </Section>
+      )
     })
   }
 
@@ -67,7 +76,10 @@ export default class Page extends React.Component {
           transition={transition}
           opacity={opacity}
         />
-        <div className={`h-screen w-screen ${transition} ${opacity} ${scroll}`}>
+        <div
+          ref={this.page}
+          className={`h-screen w-screen overflow-x-hidden  ${transition} ${opacity} ${scroll}`}
+        >
           {this._renderSections()}
         </div>
       </React.Fragment>

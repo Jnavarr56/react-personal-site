@@ -1,14 +1,12 @@
 import React from 'react'
 import Translateable from '../../Translateable'
 import SwipeableViews from 'react-swipeable-views'
-import { Waypoint } from 'react-waypoint'
 
 export default class About extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      index: 0,
-      fadeIn: false
+      index: 0
     }
 
     this.copy = {
@@ -83,7 +81,7 @@ export default class About extends React.Component {
 
   renderMobileView = (copy, fontColor, language) => {
     const slides = [
-      <div className="flex justify-start pt-5 pl-1 break-all">
+      <div key={'slide-1'} className="flex justify-start pt-5 pl-1 break-all">
         <p className={fontColor}>
           <Translateable text={copy[1][language]} />
           <br />
@@ -99,7 +97,7 @@ export default class About extends React.Component {
           </em>
         </p>
       </div>,
-      <div className="pt-5 pl-1 break-all">
+      <div key={'slide-2'} className="pt-5 pl-1 break-all">
         <p className={fontColor}>
           <Translateable text={copy[4][language]} />
           <br />
@@ -112,7 +110,7 @@ export default class About extends React.Component {
           <br />
         </p>
       </div>,
-      <div className="pt-5 pl-1 break-all">
+      <div key={'slide-3'} className="pt-5 pl-1 break-all">
         <p className={fontColor}>
           <Translateable text={copy[7][language]} />
           <br />
@@ -138,65 +136,51 @@ export default class About extends React.Component {
             const bg = index === this.state.index ? 'bg-white' : 'bg-base-red'
             return (
               <div
+                key={`ball-about-${index}`}
                 className={`${bg} rounded-full transition-all-50 border border-white h-5 w-5 mx-2`}
                 onClick={() => this.setState({ index })}
               ></div>
             )
           })}
         </div>
-        <Waypoint
-          onEnter={() => this.handleFade(true)}
-          onLeave={() => this.handleFade(false)}
-        />
       </React.Fragment>
     )
   }
 
   renderLargeView = (copy, fontColor, language) => {
     return (
-      <p className={`${fontColor} text-lg md:text-xl`}>
-        <Translateable text={copy[1][language]} />
-        <br />
-        <br />
-        <Translateable text={copy[3][language]} />
-        <br />
-        <br />
-        <Translateable text={copy[2][language]} />
-        <br />
-        <br />
-        <Translateable text={copy[4][language]} />
-        <br />
-        <br />
-        <Translateable text={copy[5][language]} />
-        <br />
-        <br />
-        <Translateable text={copy[6][language]} />
-        <br />
-        <br />
-        <Translateable text={copy[7][language]} />
-        <br />
-        <br />
-        <Translateable text={copy[8][language]} />
-      </p>
+      <React.Fragment>
+        <p className={`${fontColor} text-lg md:text-xl`}>
+          <Translateable text={copy[1][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[3][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[2][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[4][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[5][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[6][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[7][language]} />
+          <br />
+          <br />
+          <Translateable text={copy[8][language]} />
+        </p>
+      </React.Fragment>
     )
   }
 
-  handleFade = on => {
-    if (this.state.fadeIn !== on) {
-      this.setState({ fadeIn: on })
-    }
-  }
-
   render = () => {
-    const fade = this.state.fadeIn
-      ? 'opacity-100 blur-0'
-      : 'opacity-0 blur-10 scale-small'
-    const transition = this.props.transition
-
     return (
-      <div
-        className={`h-full w-full flex justify-center items-start pt-20 sm:pt-32 md:pt-48 ${transition} ${fade} relative`}
-      >
+      <React.Fragment>
         <div className="w-full flex flex-col items-center justify-center sm:hidden px-3">
           {this.renderMobileView(
             this.copy,
@@ -210,12 +194,8 @@ export default class About extends React.Component {
             this.props.fontColor,
             this.props.language
           )}
-          <Waypoint
-            onEnter={() => this.handleFade(true)}
-            onLeave={() => this.handleFade(false)}
-          />
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
