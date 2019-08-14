@@ -20,11 +20,17 @@ export default class SkillBox extends React.Component {
   render = () => {
     const testProps = [
       {
-        category: 'Programming Languages',
+        category: {
+          english: 'Programming Languages',
+          español: 'Lenguajes de Programación'
+        },
         skills: ['Java', 'Ruby', 'JavaScript']
       },
       {
-        category: 'Frameworks/Libraries',
+        category: {
+          english: 'Frameworks/Libraries',
+          español: 'Bibliotecas y Frameworks'
+        },
         skills: [
           'React.js',
           'Node.js',
@@ -37,15 +43,24 @@ export default class SkillBox extends React.Component {
         ]
       },
       {
-        category: 'Databases',
+        category: {
+          english: 'Databases',
+          español: 'Bases de Datos'
+        },
         skills: ['mongoDB', 'PostgreSQL']
       },
       {
-        category: 'Prior Experience',
+        category: {
+          english: 'Prior Experience',
+          español: 'Experiencia Previa'
+        },
         skills: ['GraphQL', 'Vagrant', 'Docker']
       },
       {
-        category: 'Other',
+        category: {
+          english: 'Other',
+          español: 'Misceláneo'
+        },
         skills: ['Git', 'npm']
       }
     ]
@@ -58,6 +73,7 @@ export default class SkillBox extends React.Component {
             bgColor={this.props.bgColor}
             onClick={this.handleClick}
             key={`skill-${index}`}
+            language={this.props.language}
             selected={index === this.state.selected}
             index={index}
             {...item}

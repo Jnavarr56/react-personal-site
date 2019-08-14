@@ -1,4 +1,5 @@
 import React from 'react'
+import Translateable from '../../Translateable'
 import { IoIosArrowDroprightCircle } from 'react-icons/io'
 
 export default class SkillCategory extends React.Component {
@@ -31,8 +32,8 @@ export default class SkillCategory extends React.Component {
           <IoIosArrowDroprightCircle
             className={`mr-2 ${categoryFontColor} transition-all-50 ${rotate}`}
           />
-          <span className={`font-primary ${categoryFontColor}`}>
-            {this.props.category}
+          <span className={`${categoryFontColor}`}>
+            <Translateable text={this.props.category[this.props.language]} />
           </span>
         </div>
         <div
@@ -41,7 +42,9 @@ export default class SkillCategory extends React.Component {
         >
           <ul ref={this.skillsContainer}>
             {this.props.skills.map((skill, i) => (
-              <li key={`${i}`}>{skill}</li>
+              <li key={`${i}`} className="font-primary">
+                {skill}
+              </li>
             ))}
           </ul>
         </div>
