@@ -12,7 +12,6 @@ export default class Section extends React.Component {
   handleFade = fadeIn => {
     if (this.state.fadeIn !== fadeIn) {
       this.setState({ fadeIn })
-      console.log('enter')
     }
   }
 

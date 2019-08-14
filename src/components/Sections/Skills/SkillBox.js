@@ -1,4 +1,5 @@
 import React from 'react'
+import SkillCategory from './SkillCategory'
 
 export default class SkillBox extends React.Component {
   constructor(props) {
@@ -6,6 +7,14 @@ export default class SkillBox extends React.Component {
     this.state = {
       selected: null
     }
+
+    this.skillsContainer = React.createRef()
+  }
+
+  handleClick = index => {
+    this.setState(state => ({
+      selected: state.selected === index ? null : index
+    }))
   }
 
   render = () => {
@@ -41,35 +50,19 @@ export default class SkillBox extends React.Component {
       }
     ]
 
-    handleClick = index => {
-      this.setState(state => ({
-        selected: state.selected === index ? null : index
-      }))
-    }
-
     return (
       <div className="w-full px-3 flex flex-col justify-center items-start">
-        {testProps.map((cat, i) => {
-          const height = this.state.selected === i ? 'h-auto ' : 'h-0'
-
-          return (
-            <div key={cat.title} onClick={() => null}>
-              <div className="w-full py-2 flex justify-start items-center">
-                <span className="mr-2">{i}</span>
-                <span>{cat.category}</span>
-              </div>
-              <div
-                className={`w-full ${height} overflow-hidden transition-all-50`}
-              >
-                <ul>
-                  {cat.skills.map(skill => (
-                    <li key={`${cat.category}${i}`}>{skill}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )
-        })}
+        {testProps.map((item, index) => (
+          <SkillCategory
+            fontColor={this.props.fontColor}
+            bgColor={this.props.bgColor}
+            onClick={this.handleClick}
+            key={`skill-${index}`}
+            selected={index === this.state.selected}
+            index={index}
+            {...item}
+          />
+        ))}
       </div>
     )
   }

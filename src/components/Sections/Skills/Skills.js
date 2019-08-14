@@ -7,6 +7,9 @@ export default class Skills extends React.Component {
   }
 
   render = () => {
-    return <SkillBox />
+    console.log(this.props)
+    const bgColor =
+      this.props.fontColor === 'text-red-base' ? 'bg-red-base' : 'bg-white'
+    return <SkillBox fontColor={this.props.fontColor} bgColor={bgColor} />
   }
 }

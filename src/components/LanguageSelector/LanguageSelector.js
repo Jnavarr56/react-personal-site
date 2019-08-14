@@ -1,5 +1,4 @@
 import React from 'react'
-import Translateable from '../Translateable'
 import Switch from 'react-switch'
 
 import eng from './eng-icon.png'

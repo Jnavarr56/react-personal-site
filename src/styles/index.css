@@ -50,3 +50,7 @@
 .scrollbar-y-visible::-webkit-scrollbar-thumb {
   @apply rounded-lg bg-red-base;
 }
+
+.rotate-right-90 {
+  transform: rotate(90deg);
+}

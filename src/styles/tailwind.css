@@ -7434,6 +7434,11 @@ video {
   background-color: #FF0000;
 }
 
+.rotate-right-90 {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
 @media (min-width: 640px) {
   .sm\:appearance-none {
     -webkit-appearance: none;

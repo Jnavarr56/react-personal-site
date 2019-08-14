@@ -1,5 +1,4 @@
 import React from 'react'
-const Splitting = require('splitting')
 
 export default class Translateable extends React.Component {
   constructor(props) {

@@ -9,7 +9,6 @@ import ReactLoading from 'react-loading'
 import { MdClose, MdWarning } from 'react-icons/md'
 import { GoOctoface } from 'react-icons/go'
 import ContentSwitcher from './ContentSwitcher/ContentSwitcher'
-import testData from './TestData'
 
 export default class Home extends React.Component {
   constructor(props) {
