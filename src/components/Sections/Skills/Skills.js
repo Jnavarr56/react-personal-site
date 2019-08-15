@@ -20,15 +20,19 @@ export default class Skills extends React.Component {
         skills: [
           {
             name: 'Java',
-            icon: <i class="devicon-java-plain-wordmark colored text-11xl"></i>
+            icon: (
+              <i className="devicon-java-plain-wordmark colored text-11xl"></i>
+            )
           },
           {
             name: 'Ruby',
-            icon: <i class="devicon-ruby-plain-wordmark colored text-11xl"></i>
+            icon: (
+              <i className="devicon-ruby-plain-wordmark colored text-11xl"></i>
+            )
           },
           {
             name: 'JavaScript',
-            icon: <i class="devicon-javascript-plain colored text-11xl"></i>
+            icon: <i className="devicon-javascript-plain colored text-11xl"></i>
           }
         ]
       },
@@ -41,38 +45,40 @@ export default class Skills extends React.Component {
           {
             name: 'React.js',
             icon: (
-              <i class="devicon-react-original-wordmark colored text-11xl"></i>
+              <i className="devicon-react-original-wordmark colored text-11xl"></i>
             )
           },
           { name: 'React-Native' },
           {
             name: 'Node.js',
             icon: (
-              <i class="devicon-nodejs-plain-wordmark colored text-11xl"></i>
+              <i className="devicon-nodejs-plain-wordmark colored text-11xl"></i>
             )
           },
           {
             name: 'Express.js',
             icon: (
-              <i class="devicon-express-original-wordmark colored text-11xl"></i>
+              <i className="devicon-express-original-wordmark colored text-11xl"></i>
             )
           },
           { name: 'Next.js:', src: next },
           { name: 'TailwindCSS', src: tailwindcss },
           {
             name: 'Ruby on Rails',
-            icon: <i class="devicon-rails-plain-wordmark colored text-11xl"></i>
+            icon: (
+              <i className="devicon-rails-plain-wordmark colored text-11xl"></i>
+            )
           },
           {
             name: 'jQuery',
             icon: (
-              <i class="devicon-jquery-plain-wordmark colored text-11xl"></i>
+              <i className="devicon-jquery-plain-wordmark colored text-11xl"></i>
             )
           },
           {
             name: 'Bootstrap',
             icon: (
-              <i class="devicon-bootstrap-plain-wordmark colored text-11xl"></i>
+              <i className="devicon-bootstrap-plain-wordmark colored text-11xl"></i>
             )
           }
         ]
@@ -86,13 +92,13 @@ export default class Skills extends React.Component {
           {
             name: 'mongoDB',
             icon: (
-              <i class="devicon-mongodb-plain-wordmark colored text-11xl"></i>
+              <i className="devicon-mongodb-plain-wordmark colored text-11xl"></i>
             )
           },
           {
             name: 'PostgreSQL',
             icon: (
-              <i class="devicon-postgresql-plain-wordmark colored text-11xl"></i>
+              <i className="devicon-postgresql-plain-wordmark colored text-11xl"></i>
             )
           }
         ]
@@ -108,13 +114,13 @@ export default class Skills extends React.Component {
           {
             name: 'Docker',
             icon: (
-              <i class="devicon-docker-plain-wordmark colored text-11xl"></i>
+              <i className="devicon-docker-plain-wordmark colored text-11xl"></i>
             )
           },
           {
             name: 'AWS S3',
             icon: (
-              <i class="devicon-amazonwebservices-plain-wordmark colored text-11xl"></i>
+              <i className="devicon-amazonwebservices-plain-wordmark colored text-11xl"></i>
             )
           }
         ]
@@ -127,7 +133,9 @@ export default class Skills extends React.Component {
         skills: [
           {
             name: 'Git',
-            icon: <i class="devicon-git-plain-wordmark colored text-11xl"></i>
+            icon: (
+              <i className="devicon-git-plain-wordmark colored text-11xl"></i>
+            )
           },
           { name: 'npm', src: npm }
         ]

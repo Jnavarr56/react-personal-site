@@ -57,6 +57,7 @@ export default class ContentSwitcher extends React.Component {
 
     return (
       <div
+        key="summary"
         className={`h-full w-full flex-shrink-0 flex flex-col justify-start items-center transition-all-25 relative scrollbar-y-visible px-3`}
         style={{ left }}
       >

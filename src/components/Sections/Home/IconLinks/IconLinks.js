@@ -43,7 +43,7 @@ export default class IconsLinks extends React.Component {
 
   render = () => {
     return (
-      <div className="z-50 flex justify-center items-start fixed bottom-0 inset-x-0 pb-5 sm:top-0 sm:left-0 sm:right-auto sm:bottom-auto sm:pt-10 sm:pl-24">
+      <div className="z-50 hidden sm:flex justify-center items-start fixed pb-5 sm:top-0 sm:left-0 sm:right-auto sm:bottom-auto sm:pt-10 sm:pl-24">
         {this.icons.map((props, i) => (
           <Icon key={`icon-${i}`} {...props} />
         ))}

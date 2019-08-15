@@ -65,12 +65,10 @@ export default class About extends React.Component {
   }
 
   handleChangeIndex = (index, old, meta) => {
-    console.log(index, old, meta)
     this.setState({ index })
   }
 
   handleSwitching = (percent, type, slides) => {
-    console.log(percent, type)
     if (type === 'end') {
       if (percent === slides.length - 1) this.setState({ index: 0 })
       else if (percent === 0) {

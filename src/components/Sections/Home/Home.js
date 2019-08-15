@@ -9,6 +9,7 @@ import ReactLoading from 'react-loading'
 import { MdClose, MdWarning } from 'react-icons/md'
 import { GoOctoface } from 'react-icons/go'
 import ContentSwitcher from './ContentSwitcher/ContentSwitcher'
+import SwipeableGithubModal from './SwipeableGithubModal/SwipeableGithubModal'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -155,12 +156,14 @@ export default class Home extends React.Component {
   renderModalContent = () => {
     if (this.state.loading) {
       return (
-        <ReactLoading
-          type={'spin'}
-          color={'red'}
-          height={'10rem'}
-          width={'10rem'}
-        />
+        <div className="h-full w-full flex justify-center items-center py-3">
+          <ReactLoading
+            type={'spin'}
+            color={'red'}
+            height={'7rem'}
+            width={'7rem'}
+          />
+        </div>
       )
     } else {
       if (this.state.error) {
@@ -344,15 +347,24 @@ export default class Home extends React.Component {
         }
 
         return (
-          <ContentSwitcher
+          <SwipeableGithubModal
             summary={text}
-            createdAt={data[dataSelector].created_at}
-            commits={payload.commits}
             repo={repo}
-            target={iconTarget}
             event={type}
+            target={iconTarget}
+            commits={payload.commits}
             language={this.props.language}
           />
+
+          // <ContentSwitcher
+          //   summary={text}
+          //   createdAt={data[dataSelector].created_at}
+          //   commits={payload.commits}
+          //   repo={repo}
+          //   target={iconTarget}
+          //   event={type}
+          //   language={this.props.language}
+          // />
         )
       }
     }
