@@ -115,7 +115,7 @@ export default class SwipeableGithubModal extends React.Component {
           ) : (
             <GoGitCommit className="text-red-base text-5xl" />
           )}
-          <p className="text-red-base text-center text-lg w-screen sm:w-6/12 truncate mt-3">
+          <p className="text-red-base text-center text-lg w-screen sm:w-9/12 truncate mt-3">
             {!index ? (
               <Translateable text={summary} />
             ) : (
