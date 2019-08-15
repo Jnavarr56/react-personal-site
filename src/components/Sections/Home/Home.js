@@ -7,9 +7,10 @@ import Button from '../../Button/FlashButton'
 import Modal from '../../Modal'
 import ReactLoading from 'react-loading'
 import { MdClose, MdWarning } from 'react-icons/md'
-import { GoOctoface } from 'react-icons/go'
+import { GoOctoface, GoBrowser } from 'react-icons/go'
 import ContentSwitcher from './ContentSwitcher/ContentSwitcher'
 import SwipeableGithubModal from './SwipeableGithubModal/SwipeableGithubModal'
+import resume from './Jorge Navarro - Resume.pdf'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -27,6 +28,8 @@ export default class Home extends React.Component {
       ...this.initialState
     }
 
+    this.download = React.createRef()
+
     this.text = {
       subtitle: {
         english: 'Full Stack Developer',
@@ -39,8 +42,12 @@ export default class Home extends React.Component {
         )
       },
       button: {
-        english: 'View Latest Public Git Action',
-        español: 'Ver Ultimo Accion de Git Publico'
+        english: 'See Last Git Event',
+        español: 'Ver Ultimo Evento de Git'
+      },
+      resume: {
+        english: 'Download Resume',
+        español: 'Descarga Oja de Vida'
       },
       modalContent: {
         errorMessage: {
@@ -156,9 +163,9 @@ export default class Home extends React.Component {
   renderModalContent = () => {
     if (this.state.loading) {
       return (
-        <div className="h-full w-full flex justify-center items-center py-3">
+        <div className="h-full w-full flex justify-center items-center py-5">
           <ReactLoading
-            type={'spin'}
+            type={'cylon'}
             color={'red'}
             height={'7rem'}
             width={'7rem'}
@@ -410,12 +417,27 @@ export default class Home extends React.Component {
           <p className="text-black text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-widest uppercase font-thin">
             <Translateable text={subtitle} />
           </p>
-          <Button
-            onClick={this.handleOpenModalClick}
-            className="mt-1 sm:mt-4 p-2 sm:p-4 rounded text-white text-xs sm:text-sm font-primary shadow-2xl tracking-widest uppercase w-full font-thin bg-red-base hover:bg-red-base-hover"
-          >
-            <Translateable text={this.text.button[this.props.language]} />
-          </Button>
+          <div className="flex flex-col md:flex-row justify-around items-center w-full mt-1 sm:mt-4">
+            <Button
+              onClick={this.handleOpenModalClick}
+              className="p-2 sm:p-4 rounded text-white text-xs sm:text-sm font-primary shadow-2xl tracking-widest uppercase w-full md:w-6/12 font-thin bg-black hover:bg-red-base transition-all-25 tran md:mr-2 my-1 md:my-0"
+            >
+              <Translateable text={this.text.button[this.props.language]} />
+            </Button>
+            <Button
+              onClick={() => this.download.current.click()}
+              className="p-2 sm:p-4 rounded text-white text-xs sm:text-sm font-primary shadow-2xl tracking-widest uppercase w-full md:w-6/12 font-thin bg-black hover:bg-red-base transition-all-25 md:ml-2 my-1 md:my-0"
+            >
+              <Translateable text={this.text.resume[this.props.language]} />
+            </Button>
+            <a
+              ref={this.download}
+              href={resume}
+              target="_blank"
+              className="hidden"
+              download
+            ></a>
+          </div>
         </div>
         <Modal
           open={this.state.open}
