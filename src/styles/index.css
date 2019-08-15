@@ -12,6 +12,11 @@
   filter: blur(0);
 }
 
+
+.blur-5 {
+  filter: blur(10px);
+}
+
 .blur-10 {
   filter: blur(20px);
 }

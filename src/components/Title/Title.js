@@ -1,6 +1,6 @@
 import React from 'react'
 import Translateable from '../Translateable'
-import { Waypoint } from 'react-waypoint'
+// import { Waypoint } from 'react-waypoint'
 import './Title.css'
 
 export default class Title extends React.Component {
@@ -15,13 +15,22 @@ export default class Title extends React.Component {
   }
 
   render = () => {
-    const style = this.state.inView
+    // const style = this.state.inView
+    // ? 'title-char-in-view'
+    // : 'title-char-out-of-view'
+
+    // const text = this.props.text.split('').map((l, i) => {
+    //   const delay = 0.25 + i * 0.1
+    //   const transitionDelay = this.state.inView ? `${delay}s` : '0s'
+    //   const padding = l === ' ' ? 'ml-3' : ''
+
+    const style = this.props.inView
       ? 'title-char-in-view'
       : 'title-char-out-of-view'
 
     const text = this.props.text.split('').map((l, i) => {
       const delay = 0.25 + i * 0.1
-      const transitionDelay = this.state.inView ? `${delay}s` : '0s'
+      const transitionDelay = this.props.inView ? `${delay}s` : '0s'
       const padding = l === ' ' ? 'ml-3' : ''
 
       return (
@@ -40,10 +49,10 @@ export default class Title extends React.Component {
         className={`${this.props.fontColor} font-thin text-2xl sm:text-5xl pt-4 pl-4 sm:pt-10 sm:pl-16 absolute top-0 left-0`}
       >
         <Translateable ref={this.translateEl} text={text} />
-        <Waypoint
+        {/* <Waypoint
           onEnter={() => this.setState({ inView: true })}
           onLeave={() => this.setState({ inView: false })}
-        />
+        /> */}
       </h3>
     )
   }

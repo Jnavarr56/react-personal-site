@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.animated-bottom-border:after {
+    content: '';
+    display: block;
+    width: 0;
+    margin-top: 5px;
+    height: 2px;
+    transition: width .3s;
+}
+
+.animated-bottom-border-red:after {
+    background: red;
+}
+
+.animated-bottom-border-white:after {
+    background: white;
+}
+
+.animated-bottom-border:hover::after {
+    width: 100%;
+    transition: width .3s;
+}
+
+.animated-bottom-border-selected::after {
+    width: 100%;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-rows: auto;
+}
+  
+.skills-grid-col-2 {
+    grid-template-columns: 50% 50%;
+}
+
+@media (min-width: 850px) {
+    .skills-grid-col-3 {
+        grid-template-columns: 33% 33% 33%;
+    }
+}
+
+
+

@@ -81,7 +81,7 @@ export default class About extends React.Component {
 
   renderMobileView = (copy, fontColor, language) => {
     const slides = [
-      <div key={'slide-1'} className="flex justify-start pt-5 pl-1 break-all">
+      <div key={'slide-1'} className="flex justify-start pt-5 pl-1 break-word">
         <p className={fontColor}>
           <Translateable text={copy[1][language]} />
           <br />
@@ -97,7 +97,7 @@ export default class About extends React.Component {
           </em>
         </p>
       </div>,
-      <div key={'slide-2'} className="pt-5 pl-1 break-all">
+      <div key={'slide-2'} className="pt-5 pl-1 break-word">
         <p className={fontColor}>
           <Translateable text={copy[4][language]} />
           <br />
@@ -110,7 +110,7 @@ export default class About extends React.Component {
           <br />
         </p>
       </div>,
-      <div key={'slide-3'} className="pt-5 pl-1 break-all">
+      <div key={'slide-3'} className="pt-5 pl-1 break-word">
         <p className={fontColor}>
           <Translateable text={copy[7][language]} />
           <br />

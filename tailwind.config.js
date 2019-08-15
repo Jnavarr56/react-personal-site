@@ -7,7 +7,9 @@ module.exports = {
       fontSize: {
         "7xl": "5rem",
         "8xl": "6rem",
-        "9xl": "7rem"
+        "9xl": "7rem",
+        "10xl": "8rem",
+        "11xl": "9rem"
       },
       zIndex: {
         "9999": 9999,

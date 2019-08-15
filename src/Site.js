@@ -46,7 +46,7 @@ export default class Site extends React.Component {
         section: <Skills transition={'transition-all-50'} />,
         title: {
           english: 'Skills',
-          español: 'Capcidades'
+          español: 'Habilidades'
         }
       }
     ]
@@ -61,7 +61,7 @@ export default class Site extends React.Component {
           />
         ) : (
           <LandingAnimation
-            countUpInterval={20}
+            countUpInterval={35}
             fadeOutDelay={250}
             fadeOutDuration={500}
             transition={'transition-all-50'}

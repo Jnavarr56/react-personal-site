@@ -6932,6 +6932,14 @@ video {
   font-size: 7rem;
 }
 
+.text-10xl {
+  font-size: 8rem;
+}
+
+.text-11xl {
+  font-size: 9rem;
+}
+
 .italic {
   font-style: italic;
 }
@@ -7379,6 +7387,11 @@ video {
 .blur-0 {
   -webkit-filter: blur(0);
           filter: blur(0);
+}
+
+.blur-5 {
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
 }
 
 .blur-10 {
@@ -13743,6 +13756,14 @@ video {
 
   .sm\:text-9xl {
     font-size: 7rem;
+  }
+
+  .sm\:text-10xl {
+    font-size: 8rem;
+  }
+
+  .sm\:text-11xl {
+    font-size: 9rem;
   }
 
   .sm\:italic {
@@ -20489,6 +20510,14 @@ video {
     font-size: 7rem;
   }
 
+  .md\:text-10xl {
+    font-size: 8rem;
+  }
+
+  .md\:text-11xl {
+    font-size: 9rem;
+  }
+
   .md\:italic {
     font-style: italic;
   }
@@ -27233,6 +27262,14 @@ video {
     font-size: 7rem;
   }
 
+  .lg\:text-10xl {
+    font-size: 8rem;
+  }
+
+  .lg\:text-11xl {
+    font-size: 9rem;
+  }
+
   .lg\:italic {
     font-style: italic;
   }
@@ -33975,6 +34012,14 @@ video {
 
   .xl\:text-9xl {
     font-size: 7rem;
+  }
+
+  .xl\:text-10xl {
+    font-size: 8rem;
+  }
+
+  .xl\:text-11xl {
+    font-size: 9rem;
   }
 
   .xl\:italic {
