@@ -25,6 +25,9 @@ export default class Page extends React.Component {
   }
 
   componentDidMount = () => {
+    window.addEventListener('resize', () => {
+      this.page.current.scrollTo(0, 0)
+    })
     setTimeout(() => {
       this.setState({
         fadeIn: true,

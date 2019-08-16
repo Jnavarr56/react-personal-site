@@ -77,7 +77,6 @@ export default class SwipeableGithubModal extends React.Component {
   render = () => {
     const { event, language, target, summary, commits, repo } = this.props
 
-    console.log(this.props)
     const pagination = []
     const slides = [summary, ...commits.reverse()].map((slide, index, arr) => {
       let message = ''
