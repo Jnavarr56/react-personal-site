@@ -14,9 +14,9 @@ export default class SkillCategory extends React.Component {
       ? this.skillsContainer.current.clientHeight
       : 0
     const borderBottomColor =
-      this.props.headerBgColor === 'bg-red-base'
+      this.props.headerFontColor === 'text-white'
         ? 'border-white'
-        : 'border-red-base'
+        : 'border-red'
     const rotate = this.props.selected ? 'rotate-right-90' : ''
 
     return (
@@ -28,7 +28,7 @@ export default class SkillCategory extends React.Component {
           className={`w-full py-2 pl-2 flex justify-start items-center ${this.props.headerBgColor} border-b ${borderBottomColor}`}
         >
           <IoIosArrowDroprightCircle
-            className={`mr-2 ${this.props.headerFontColor} transition-all-25rs ${rotate}`}
+            className={`mr-2 text-red-base transition-all-25rs ${rotate}`}
           />
           <span className={this.props.headerFontColor}>
             <Translateable text={this.props.category[this.props.language]} />

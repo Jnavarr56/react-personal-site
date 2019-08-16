@@ -144,15 +144,15 @@ export default class Skills extends React.Component {
   }
 
   render = () => {
-    let headerFontColor, headerBgColor, underlineColor
-    if (this.props.fontColor === 'text-red-base') {
-      headerFontColor = 'text-white'
-      headerBgColor = 'bg-red-base'
+    let headerFontColor,
+      headerBgColor,
       underlineColor = 'animated-bottom-border-red'
+    if (this.props.fontColor === 'text-black') {
+      headerFontColor = 'text-white'
+      headerBgColor = 'bg-black'
     } else {
-      headerFontColor = 'text-red-base'
+      headerFontColor = 'text-black'
       headerBgColor = 'bg-white'
-      underlineColor = 'animated-bottom-border-white'
     }
 
     return (

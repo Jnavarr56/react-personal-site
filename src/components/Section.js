@@ -22,10 +22,11 @@ export default class Section extends React.Component {
       language,
       title,
       backgroundColor,
-      page
+      page,
+      showTitle
     } = this.props
     const fontColor =
-      backgroundColor === 'bg-red-base' ? 'text-white' : 'text-red-base'
+      backgroundColor === 'bg-black' ? 'text-white' : 'text-black'
 
     const fade = this.state.fadeIn
       ? 'opacity-100 blur-0'
@@ -38,7 +39,7 @@ export default class Section extends React.Component {
         className={`h-screen w-screen relative overflow-hidden ${backgroundColor}`}
         ref={innerRef}
       >
-        {title && (
+        {showTitle && (
           <Title
             inView={this.state.fadeIn}
             fontColor={fontColor}
@@ -53,13 +54,14 @@ export default class Section extends React.Component {
             >
               {React.cloneElement(children, { fontColor, language, page })}
             </div>
-            <div className="absolute bottom-0 left-0 h-5 w-full flex justify-center items-center">
+            {/* <div className="absolute bottom-0 left-0 h-5 w-full flex justify-center items-center">
               <Waypoint
                 fireOnRapidScroll={true}
-                onEnter={() => this.handleFade(true)}
                 onLeave={() => this.handleFade(false)}
+                onEnter={() => this.handleFade(true)}
+                // scrollableAncestor={'window'}
               />
-            </div>
+            </div> */}
           </React.Fragment>
         ) : (
           React.cloneElement(children, { fontColor, language, page })

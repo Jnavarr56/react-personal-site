@@ -23,7 +23,7 @@ export default class Translateable extends React.Component {
   }
 
   componentDidUpdate = prevProps => {
-    if (prevProps.text !== this.props.text) {
+    if (prevProps.text !== this.props.text && this.prevProps !== '') {
       this.setState({ fadingOut: true, fadingIn: false }, () => {
         setTimeout(() => {
           this.setState({ text: this.props.text }, () => {

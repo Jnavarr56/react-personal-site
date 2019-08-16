@@ -43,19 +43,19 @@ export default class SwipeableGithubModal extends React.Component {
     let summaryIcon = null
 
     if (event === 'DeleteEvent') {
-      summaryIcon = <GoTrashcan className="text-red-base text-5xl" />
+      summaryIcon = <GoTrashcan className="text-white text-5xl" />
     } else if (target === 'branch') {
       if (event === 'CreateEvent')
-        summaryIcon = <GoGitBranch className="text-red-base text-5xl" />
+        summaryIcon = <GoGitBranch className="text-white text-5xl" />
       else if (event === 'PushEvent')
-        summaryIcon = <GoTerminal className="text-red-base text-5xl" />
+        summaryIcon = <GoTerminal className="text-white text-5xl" />
     } else if (target === 'repo') {
       if (event === 'CreateEvent')
-        summaryIcon = <GoRepo className="text-red-base text-5xl" />
+        summaryIcon = <GoRepo className="text-white text-5xl" />
       else if (event === 'PushEvent')
-        summaryIcon = <GoRepoPush className="text-red-base text-5xl" />
+        summaryIcon = <GoRepoPush className="text-white text-5xl" />
     } else {
-      summaryIcon = <GoTerminal className="text-red-base text-5xl" />
+      summaryIcon = <GoTerminal className="text-white text-5xl" />
     }
 
     return summaryIcon
@@ -77,6 +77,7 @@ export default class SwipeableGithubModal extends React.Component {
   render = () => {
     const { event, language, target, summary, commits, repo } = this.props
 
+    console.log(this.props)
     const pagination = []
     const slides = [summary, ...commits.reverse()].map((slide, index, arr) => {
       let message = ''
@@ -94,12 +95,12 @@ export default class SwipeableGithubModal extends React.Component {
         )
       }
 
-      if (arr.length) {
-        const bg = index === this.state.index ? 'bg-red-base' : ''
+      if (arr.length > 1) {
+        const bg = index === this.state.index ? 'bg-white' : ''
         pagination.push(
           <div
             key={`ball-about-${index}`}
-            className={`${bg} rounded-full transition-all-50 border border-red-base h-5 w-5 mx-2 cursor-pointer`}
+            className={`${bg} rounded-full transition-all-50 border border-white h-5 w-5 mx-2 cursor-pointer`}
             onClick={() => this.setState({ index })}
           ></div>
         )
@@ -113,9 +114,9 @@ export default class SwipeableGithubModal extends React.Component {
           {!index ? (
             this.getSummaryIcon(event, target)
           ) : (
-            <GoGitCommit className="text-red-base text-5xl" />
+            <GoGitCommit className="text-white text-5xl" />
           )}
-          <p className="text-red-base text-center text-lg w-screen sm:w-9/12 truncate mt-3">
+          <p className="text-white text-center text-lg w-screen md:w-200 mt-3">
             {!index ? (
               <Translateable text={summary} />
             ) : (
@@ -133,6 +134,7 @@ export default class SwipeableGithubModal extends React.Component {
           enableMouseEvents={true}
           onSwitching={(p, type) => this.handleSwitching(p, type, slides)}
           onChangeIndex={this.handleChangeIndex}
+          disableLazyLoading={true}
         >
           {slides}
         </SwipeableViews>

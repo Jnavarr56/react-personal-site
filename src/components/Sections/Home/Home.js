@@ -165,8 +165,8 @@ export default class Home extends React.Component {
       return (
         <div className="h-full w-full flex justify-center items-center py-5">
           <ReactLoading
-            type={'cylon'}
-            color={'red'}
+            type={'spin'}
+            color={'white'}
             height={'7rem'}
             width={'7rem'}
           />
@@ -175,7 +175,7 @@ export default class Home extends React.Component {
     } else {
       if (this.state.error) {
         return (
-          <p className="font-primary text-red-base">
+          <p className="font-primary text-white">
             <Translateable
               text={this.text.modalContent.errorMessage[this.props.language]}
             />
@@ -353,13 +353,14 @@ export default class Home extends React.Component {
           }
         }
 
+        const commitProps = payload.commits ? payload.commits : []
         return (
           <SwipeableGithubModal
             summary={text}
             repo={repo}
             event={type}
             target={iconTarget}
-            commits={payload.commits}
+            commits={commitProps}
             language={this.props.language}
           />
 
@@ -381,11 +382,11 @@ export default class Home extends React.Component {
     return (
       <div className="w-screen md:w-200 flex flex-col justify-start items-center">
         <div className="rounded overflow-hidden bg-black h-full w-full flex flex-col justify-start items-center">
-          <div className="w-full border-b border-red-base flex justify-between p-3">
+          <div className="w-full border-b border-white flex justify-between p-3">
             {this.state.error ? (
-              <MdWarning className="text-red-base text-2xl" />
+              <MdWarning className="text-white text-3xl" />
             ) : (
-              <GoOctoface className="text-red-base text-2xl" />
+              <GoOctoface className="text-white text-3xl" />
             )}
             <MdClose
               className="text-red-base text-2xl cursor-pointer"

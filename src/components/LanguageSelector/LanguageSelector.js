@@ -23,10 +23,19 @@ class LanguageSelector extends React.Component {
     document.getElementsByClassName(
       'react-switch-handle'
     )[0].style.backgroundSize = `cover`
+
+    document.getElementsByClassName('react-switch-bg')[0].style.borderStyle =
+      'solid'
+    document.getElementsByClassName('react-switch-bg')[0].style.borderColor =
+      this.props.bgColor === 'bg-black' ? 'white' : 'black'
+    document.getElementsByClassName('react-switch-bg')[0].style.borderWidth =
+      '1px'
   }
 
   componentDidMount = () => {
     this._setBackground()
+    document.getElementsByClassName('react-switch-bg')[0].style.transition =
+      'all .25s ease'
   }
 
   componentDidUpdate = () => {
@@ -34,16 +43,16 @@ class LanguageSelector extends React.Component {
   }
 
   render = () => {
-    const { transition, opacity } = this.props
+    const { transition, opacity, bgColor, language, onChange } = this.props
     return (
       <div
         className={`fixed top-0 right-0 z-999999 flex justify-center items-center pt-5 pr-5 sm:pt-12 sm:pr-24 ${transition} ${opacity}`}
       >
         <Switch
-          checked={this.props.language ? true : false}
-          onChange={this.props.onChange}
-          onColor="#000000"
-          offColor="#000000"
+          checked={language ? true : false}
+          onChange={onChange}
+          onColor={bgColor === 'bg-black' ? '#000000' : '#ffffff'}
+          offColor={bgColor === 'bg-black' ? '#000000' : '#ffffff'}
           handleDiameter={30}
           uncheckedIcon={false}
           checkedIcon={false}

@@ -34,9 +34,17 @@ export default class Site extends React.Component {
 
   render = () => {
     const sections = [
-      { section: <Home /> },
+      {
+        section: <Home />,
+        showTitle: false,
+        title: {
+          english: 'Home',
+          español: 'Inicio'
+        }
+      },
       {
         section: <About transition={'transition-all-50'} />,
+        showTitle: true,
         title: {
           english: 'About',
           español: 'Sobre Mi'
@@ -44,6 +52,7 @@ export default class Site extends React.Component {
       },
       {
         section: <Skills transition={'transition-all-50'} />,
+        showTitle: true,
         title: {
           english: 'Skills',
           español: 'Habilidades'

@@ -17,7 +17,9 @@
     "react-swipeable-views-utils": "^0.13.3",
     "react-switch": "^5.0.1",
     "react-waypoint": "^9.0.2",
-    "splitting": "^1.0.6"
+    "scroll-to-element": "^2.0.3",
+    "splitting": "^1.0.6",
+    "zenscroll": "^4.0.2"
   },
   "scripts": {
     "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",

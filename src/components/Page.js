@@ -1,6 +1,9 @@
 import React from 'react'
 import Section from './Section'
 import LanguageSelector from './LanguageSelector/LanguageSelector'
+import MobileNav from './MobileNav/MobileNav'
+import zenScroll from 'zenscroll'
+// const scrollToElement = require('scroll-to-element')
 
 export default class Page extends React.Component {
   constructor(props) {
@@ -9,24 +12,40 @@ export default class Page extends React.Component {
     this.state = {
       language: 0,
       fadeIn: false,
+      moving: false,
+      selectorColor: 'bg-black',
       sections: []
     }
 
     this.page = React.createRef()
 
     this.languages = ['english', 'español']
+
+    this.timeout = null
   }
 
   componentDidMount = () => {
-    const sections = this._withRefs(this.props.sections)
-
     setTimeout(() => {
-      this.setState({ fadeIn: true, sections })
+      this.setState({
+        fadeIn: true,
+        sections: this._renderSections()
+      })
     }, 500)
   }
 
-  _withRefs = secs => {
-    return secs.map(s => Object.assign(s, { ref: React.createRef() }))
+  handleMove = (secRef, innerRef, selectorColor, index) => {
+    this.state.sections.forEach(section =>
+      section.ref.current.handleFade(false)
+    )
+
+    const scroller = zenScroll.createScroller(this.page.current, null, 0)
+
+    scroller.to(innerRef, 250, () => {
+      setTimeout(() => {
+        secRef.handleFade(true)
+        this.setState({ selectorColor })
+      }, 250)
+    })
   }
 
   _getLanguage = () => {
@@ -34,15 +53,17 @@ export default class Page extends React.Component {
   }
 
   _renderSections = () => {
-    return this.state.sections.map((s, i) => {
+    return this.props.sections.map((s, i) => {
       const sectionProps = {
-        innerRef: s.ref,
-        backgroundColor: i % 2 ? 'bg-red-base' : 'bg-white',
+        backgroundColor: i % 2 ? 'bg-black' : 'bg-white',
         language: this._getLanguage(),
         title: s.title,
+        showTitle: s.showTitle,
         page: this.page,
         fadeable: i ? true : false,
-        transition: 'transition-all-50'
+        transition: 'transition-all-50',
+        ref: React.createRef(),
+        innerRef: React.createRef()
       }
 
       return (
@@ -54,17 +75,15 @@ export default class Page extends React.Component {
   }
 
   handleLanguageChange = language => {
-    this.setState({ language: language ? 1 : 0 })
+    this.setState({ language: language ? 1 : 0 }, () => {
+      this.setState({ sections: this._renderSections() })
+    })
   }
 
   render = () => {
     const opacity = this.state.fadeIn
       ? 'opacity-100 blur-0'
       : 'opacity-0 blur-10'
-
-    const scroll = this.props.scrollable
-      ? 'overflow-y-scroll'
-      : 'overflow-hidden'
 
     const { transition } = this.props
 
@@ -75,12 +94,19 @@ export default class Page extends React.Component {
           onChange={this.handleLanguageChange}
           transition={transition}
           opacity={opacity}
+          bgColor={this.state.selectorColor}
+        />
+        <MobileNav
+          scrollableAncestor={this.page}
+          language={this.languages[this.state.language]}
+          sections={this.state.sections}
+          onMove={this.handleMove}
         />
         <div
           ref={this.page}
-          className={`h-screen w-screen overflow-x-hidden  ${transition} ${opacity} ${scroll}`}
+          className={`h-screen w-screen ${transition} ${opacity} overflow-hidden scroll-smooth`}
         >
-          {this._renderSections()}
+          {this.state.sections}
         </div>
       </React.Fragment>
     )

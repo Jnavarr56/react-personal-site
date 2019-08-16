@@ -59,3 +59,8 @@
 .rotate-right-90 {
   transform: rotate(90deg);
 }
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
