@@ -1,0 +1,238 @@
+.mobile-menu-container {
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* background-color: black; */
+    border-radius: 100%;
+    /* color: white; */
+    cursor: pointer;
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    -webkit-transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    z-index: 100; 
+}
+/* line 20, ../scss/_mobile-nav.scss */
+.mobile-menu-container.mobile-full-menu {
+    border-radius: 0;
+    padding: 0 !important;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: 1s cubic-bezier(0.645, 0.045, 0.355, 1); 
+}
+  
+  /* line 30, ../scss/_mobile-nav.scss */
+.mobile-full-menu .mobile-menu {
+    top: 5%;
+    left: 45px; 
+}
+  
+  /* line 34, ../scss/_mobile-nav.scss */
+.mobile-menu {
+    /* color: white; */
+    font-size: 2.75rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 101;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; 
+}
+    /* line 43, ../scss/_mobile-nav.scss */
+.mobile-menu i {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+    /* color: white;  */
+}
+      /* line 48, ../scss/_mobile-nav.scss */
+.mobile-menu i:hover {
+    opacity: 1;
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; 
+}
+  
+  /* line 55, ../scss/_mobile-nav.scss */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden; 
+}
+/* line 64, ../scss/_mobile-nav.scss */
+.mobile-overlay.mobile-open {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+    z-index: 100; 
+}
+    /* line 69, ../scss/_mobile-nav.scss */
+.mobile-overlay.mobile-open li {
+    -webkit-animation: fadeInRight .5s ease forwards;
+            animation: fadeInRight .5s ease forwards;
+    -webkit-animation-delay: .35s;
+            animation-delay: .35s; 
+}
+/* line 73, ../scss/_mobile-nav.scss */
+.mobile-overlay.mobile-open li:nth-of-type(2) {
+    -webkit-animation-delay: .4s;
+            animation-delay: .4s; 
+}
+/* line 77, ../scss/_mobile-nav.scss */
+.mobile-overlay.mobile-open li:nth-of-type(3) {
+    -webkit-animation-delay: .45s;
+            animation-delay: .45s; 
+}
+/* line 81, ../scss/_mobile-nav.scss */
+.mobile-overlay.mobile-open li:nth-of-type(4) {
+    -webkit-animation-delay: .50s;
+            animation-delay: .50s; 
+}
+    /* line 86, ../scss/_mobile-nav.scss */
+.mobile-overlay nav {
+    font-size: 2.5em;
+    font-family: "Raleway", san-serif;
+    position: relative;
+    height: 70%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    font-weight: 400;
+    text-align: center; 
+}
+    /* line 95, ../scss/_mobile-nav.scss */
+.mobile-overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+    position: relative;
+    height: 100%; 
+}
+      /* line 102, ../scss/_mobile-nav.scss */
+.mobile-overlay ul li {
+    display: block;
+    height: 20%;
+    height: calc(100% / 5);
+    min-height: 50px;
+    position: relative;
+    opacity: 0; 
+}
+        /* line 109, ../scss/_mobile-nav.scss */
+.mobile-overlay ul li a {
+    display: block;
+    position: relative;
+    /* color: white; */
+    text-decoration: none;
+    overflow: hidden;
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; 
+}
+          /* line 118, ../scss/_mobile-nav.scss */
+.mobile-overlay ul li a:hover, .mobile-overlay ul li a:focus, .mobile-overlay ul li a:active {
+    opacity: 1;
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; 
+}
+  
+@-webkit-keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      top: 0;
+      left: 40px; 
+    }
+    100% {
+      opacity: 1;
+      left: 0; 
+    } 
+}
+  
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        top: 0;
+        left: 40px; 
+    }
+    100% {
+        opacity: 1;
+        left: 0; 
+    } 
+}
+/*  
+@media (max-height: 750px) {
+
+.mobile-overlay li {
+    -webkit-transform: scale(0.75, 0.75);
+            transform: scale(0.75, 0.75); 
+}
+@media (max-width: 700px) {
+    .mobile-menu-container {
+        height: 90px;
+        width: 90px;
+        right: 55px;
+        bottom: 55px; }
+
+
+    .mobile-menu {
+        font-size: 2.5rem; 
+    } 
+}
+@media (max-width: 650px) {
+
+    .mobile-menu-container {
+        height: 80px;
+        width: 80px;
+        right: 50px;
+        bottom: 52.5px; 
+    }
+
+    .mobile-menu {
+        font-size: 2.25rem; 
+    } 
+}
+@media (max-width: 650px) {
+
+    .mobile-menu-container {
+        height: 70px;
+        width: 70px;
+        right: 45px;
+        bottom: 50px; }
+
+
+    .mobile-menu {
+        font-size: 2rem; 
+    } 
+}
+@media (max-width: 650px) {
+
+    .mobile-menu-container {
+        height: 70px;
+        width: 70px;
+        right: 40px;
+        bottom: 47.5px; 
+    }
+
+
+    .mobile-menu {
+        font-size: 2.25rem; 
+    } 
+}
+*/
