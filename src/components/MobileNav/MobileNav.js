@@ -21,7 +21,7 @@ export default class MobileNav extends React.Component {
   handleItemClick = (section, i) => {
     if (!this.state.clickable) return null
 
-    if (!this.state.current === i) {
+    if (this.state.current === i) {
       this.setState({ open: false })
       return
     }
