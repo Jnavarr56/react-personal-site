@@ -410,7 +410,7 @@ export default class Home extends React.Component {
           className="h-full w-full absolute top-0 right-0"
         ></div>
         <IconLinks />
-        <div className="z-50 bg-white-opacity-75 flex flex-col items-center px-3">
+        <div className="z-9999 bg-white-opacity-75 flex flex-col items-center px-3">
           <h1 className="text-black text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-primary">
             Jorge Andrés Navarro
           </h1>
